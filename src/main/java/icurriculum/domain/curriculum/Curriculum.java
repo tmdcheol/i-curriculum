@@ -38,7 +38,7 @@ public class Curriculum extends BaseMongoEntity {
     private String id;
 
     private CurriculumDecider decider;
-
+    private String lastEditor;
     /*
      * - 핵심교양
      * - SW_AI
@@ -62,12 +62,14 @@ public class Curriculum extends BaseMongoEntity {
     @Builder
     private Curriculum(
         CurriculumDecider decider,
+        String lastEditor,
         Core core, SwAi swAi,
         Creativity creativity, MajorRequired majorRequired,
         MajorSelect majorSelect, GeneralRequired generalRequired,
         RequiredCredit requiredCredit, AlternativeCourse alternativeCourse
     ) {
         this.decider = decider;
+        this.lastEditor = lastEditor;
         this.core = core;
         this.swAi = swAi;
         this.creativity = creativity;
@@ -91,7 +93,7 @@ public class Curriculum extends BaseMongoEntity {
      */
 
     public void validate() {
-        if (decider == null ||
+        if (decider == null || lastEditor == null ||
             core == null || swAi == null ||
             creativity == null || majorRequired == null ||
             majorSelect == null || generalRequired == null ||
@@ -109,5 +111,21 @@ public class Curriculum extends BaseMongoEntity {
         generalRequired.validate();
         requiredCredit.validate();
     }
+
+    public void update(Curriculum newCurriculum) {
+
+        this.lastEditor = newCurriculum.getLastEditor();
+        this.core = newCurriculum.getCore();
+        this.swAi = newCurriculum.getSwAi();
+        this.creativity = newCurriculum.getCreativity();
+        this.majorRequired = newCurriculum.getMajorRequired();
+        this.majorSelect = newCurriculum.getMajorSelect();
+        this.generalRequired = newCurriculum.getGeneralRequired();
+        this.requiredCredit = newCurriculum.getRequiredCredit();
+        this.alternativeCourse = newCurriculum.getAlternativeCourse();
+
+        this.validate();
+    }
+
 
 }
