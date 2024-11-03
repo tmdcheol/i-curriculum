@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Ignore Main application.yml
+/src/main/resources/application.yml
+
+# Ignore Test application.yml
+/src/test/resources/application.yml
