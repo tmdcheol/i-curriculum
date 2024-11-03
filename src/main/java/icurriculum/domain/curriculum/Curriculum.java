@@ -25,10 +25,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "curriculums")
 @NoArgsConstructor(access = PROTECTED)
 @CompoundIndexes({
-    @CompoundIndex(
-        name = "uniqueCurriculumDecider",
-        def = "{'decider.majorType': 1, 'decider.departmentName': 1, 'decider.joinYear': 1}",
-        unique = true)
+        @CompoundIndex(
+                name = "uniqueCurriculumDecider",
+                def = "{'decider.majorType': 1, 'decider.departmentName': 1, 'decider.joinYear': 1}",
+                unique = true)
 })
 @Getter
 @ToString
@@ -61,12 +61,12 @@ public class Curriculum extends BaseMongoEntity {
 
     @Builder
     private Curriculum(
-        CurriculumDecider decider,
-        String lastEditor,
-        Core core, SwAi swAi,
-        Creativity creativity, MajorRequired majorRequired,
-        MajorSelect majorSelect, GeneralRequired generalRequired,
-        RequiredCredit requiredCredit, AlternativeCourse alternativeCourse
+            CurriculumDecider decider,
+            String lastEditor,
+            Core core, SwAi swAi,
+            Creativity creativity, MajorRequired majorRequired,
+            MajorSelect majorSelect, GeneralRequired generalRequired,
+            RequiredCredit requiredCredit, AlternativeCourse alternativeCourse
     ) {
         this.decider = decider;
         this.lastEditor = lastEditor;
@@ -94,10 +94,10 @@ public class Curriculum extends BaseMongoEntity {
 
     public void validate() {
         if (decider == null || lastEditor == null ||
-            core == null || swAi == null ||
-            creativity == null || majorRequired == null ||
-            majorSelect == null || generalRequired == null ||
-            requiredCredit == null || alternativeCourse == null
+                core == null || swAi == null ||
+                creativity == null || majorRequired == null ||
+                majorSelect == null || generalRequired == null ||
+                requiredCredit == null || alternativeCourse == null
         ) {
             throw new GeneralException(ErrorStatus.CURRICULUM_MISSING_VALUE, this);
         }

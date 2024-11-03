@@ -33,12 +33,12 @@ public class AlternativeCourseTest {
 
         // when
         AlternativeCourse alternativeCourse = AlternativeCourse.builder()
-            .alternativeCourseCodeMap(alternativeCourseMap)
-            .build();
+                .alternativeCourseCodeMap(alternativeCourseMap)
+                .build();
 
         // then
         assertThat(alternativeCourse.getAlternativeCodeSet("ABC1234"))
-            .containsExactlyInAnyOrder("ABB1236", "ABB1237");
+                .containsExactlyInAnyOrder("ABB1236", "ABB1237");
     }
 
     @Test
@@ -52,8 +52,8 @@ public class AlternativeCourseTest {
         alternativeCourseMap.put("ABC1234", alternativeCodeSet);
 
         AlternativeCourse alternativeCourse = AlternativeCourse.builder()
-            .alternativeCourseCodeMap(alternativeCourseMap)
-            .build();
+                .alternativeCourseCodeMap(alternativeCourseMap)
+                .build();
 
         // when
         Set<String> result = alternativeCourse.getAlternativeCodeSet("NON_EXISTING_CODE");

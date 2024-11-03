@@ -23,10 +23,10 @@ public class CoreResult {
     }
 
     public void update(
-        Take take,
-        Iterator<Take> iterator,
-        Category area,
-        boolean isAreaAlternative
+            Take take,
+            Iterator<Take> iterator,
+            Category area,
+            boolean isAreaAlternative
     ) {
         completedCredit += take.getEffectiveCourse().getCredit();
         uncompletedArea.remove(area);

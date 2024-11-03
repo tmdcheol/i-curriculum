@@ -6,11 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 public abstract class CourseResponse {
+
     @Getter
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DetailInfoDTO {
+
         private Long courseId;
         private String name;
         private Integer credit;

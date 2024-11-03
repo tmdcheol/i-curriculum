@@ -19,9 +19,9 @@ public class CoreTest {
     void 빌더로_Core_객체_생성시_기본값_설정_테스트() {
         // given
         Core core = Core.builder()
-            .isAreaFixed(true)
-            .requiredCredit(9)
-            .build();
+                .isAreaFixed(true)
+                .requiredCredit(9)
+                .build();
 
         // then
         assertThat(core.getIsAreaFixed()).isTrue();
@@ -42,17 +42,17 @@ public class CoreTest {
         areaAlternativeMap.put(Category.핵심교양6, alternativeCodeSET);
 
         Core core = Core.builder()
-            .isAreaFixed(true)
-            .requiredCredit(9)
-            .areaDeterminedCodeMap(areaDeterminedMap)
-            .areaAlternativeCodeMap(areaAlternativeMap)
-            .build();
+                .isAreaFixed(true)
+                .requiredCredit(9)
+                .areaDeterminedCodeMap(areaDeterminedMap)
+                .areaAlternativeCodeMap(areaAlternativeMap)
+                .build();
 
         // then
         assertThat(core.getAreaDeterminedCodeSet(Category.핵심교양1)).containsExactlyInAnyOrder(
-            "GED2101");
+                "GED2101");
         assertThat(core.getAreaAlternativeCodeSet(Category.핵심교양6)).containsExactlyInAnyOrder(
-            "ACE1301", "ACE1306");
+                "ACE1301", "ACE1306");
     }
 
     @Test
@@ -60,9 +60,9 @@ public class CoreTest {
     void 존재하지_않는_DeterminedCodeSet_빈_값_반환_테스트() {
         // given
         Core core = Core.builder()
-            .isAreaFixed(true)
-            .requiredCredit(9)
-            .build();
+                .isAreaFixed(true)
+                .requiredCredit(9)
+                .build();
 
         // when
         Set<String> result = core.getAreaDeterminedCodeSet(Category.핵심교양3);
@@ -76,8 +76,8 @@ public class CoreTest {
     void 필수값_누락시_예외_발생_테스트() {
         // when & then
         assertThatThrownBy(() -> Core.builder().build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
     }
 
     @Test
@@ -85,13 +85,13 @@ public class CoreTest {
     void 유효하지_않은_카테고리_사용시_예외_발생_테스트() {
         // given
         Core core = Core.builder()
-            .isAreaFixed(true)
-            .requiredCredit(9)
-            .build();
+                .isAreaFixed(true)
+                .requiredCredit(9)
+                .build();
 
         // then
         assertThatThrownBy(() -> core.getAreaDeterminedCodeSet(Category.교양선택))
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CORE_NOT_VALID_CATEGORY);
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CORE_NOT_VALID_CATEGORY);
     }
 }

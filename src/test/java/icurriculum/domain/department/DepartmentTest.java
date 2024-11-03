@@ -8,6 +8,7 @@ import static icurriculum.data.TestDataInitializer.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DepartmentTest {
+
     private final TestDataInitializer dataInitializer = new TestDataInitializer();
 
     @Test

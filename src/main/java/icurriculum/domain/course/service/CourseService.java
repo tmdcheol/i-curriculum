@@ -35,7 +35,9 @@ public class CourseService {
         /**
          * todo : error 처리 수
          */
-        if (course.isEmpty()) throw new GeneralException(ErrorStatus.COURSE_IS_NOT_VALID, this);
+        if (course.isEmpty()) {
+            throw new GeneralException(ErrorStatus.COURSE_IS_NOT_VALID, this);
+        }
         Course findCourse = course.get();
         ArrayList<String> codes = new ArrayList<>();
         codes.add(code);

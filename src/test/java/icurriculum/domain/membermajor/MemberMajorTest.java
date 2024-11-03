@@ -18,14 +18,14 @@ class MemberMajorTest {
     @BeforeEach
     void setUp() {
         testMember = Member.builder()
-            .name("이승철")
-            .joinYear(19)
-            .role(RoleType.ROLE_USER)
-            .build();
+                .name("이승철")
+                .joinYear(19)
+                .role(RoleType.ROLE_USER)
+                .build();
 
         testDepartment = Department.builder()
-            .name(DepartmentName.컴퓨터공학과)
-            .build();
+                .name(DepartmentName.컴퓨터공학과)
+                .build();
     }
 
     @Test
@@ -33,10 +33,10 @@ class MemberMajorTest {
     void memberMajor_객체_생성_테스트() {
         // given
         MemberMajor memberMajor = MemberMajor.builder()
-            .majorType(MajorType.주전공)
-            .department(testDepartment)
-            .member(testMember)
-            .build();
+                .majorType(MajorType.주전공)
+                .department(testDepartment)
+                .member(testMember)
+                .build();
 
         // when & then
         assertThat(memberMajor.getMajorType()).isEqualTo(MajorType.주전공);

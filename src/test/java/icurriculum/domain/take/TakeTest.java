@@ -21,21 +21,21 @@ public class TakeTest {
     @BeforeEach
     void setUp() {
         testMember = Member.builder()
-            .name("이승철")
-            .joinYear(19)
-            .role(RoleType.ROLE_USER)
-            .build();
+                .name("이승철")
+                .joinYear(19)
+                .role(RoleType.ROLE_USER)
+                .build();
 
         course = Course.builder()
-            .code("GEB1112")
-            .name("크로스오버 1 : 인간의 탐색")
-            .credit(2)
-            .build();
+                .code("GEB1112")
+                .name("크로스오버 1 : 인간의 탐색")
+                .credit(2)
+                .build();
 
         customCourse = CustomCourse.builder()
-            .name("현장실습 18")
-            .credit(18)
-            .build();
+                .name("현장실습 18")
+                .credit(18)
+                .build();
     }
 
     @Test
@@ -43,13 +43,13 @@ public class TakeTest {
     void take_객체_생성_테스트_Course_할당() {
         // when
         Take take = Take.builder()
-            .category(Category.전공필수)
-            .takenYear("23")
-            .takenSemester("1")
-            .member(testMember)
-            .course(course)
-            .majorType(MajorType.주전공)
-            .build();
+                .category(Category.전공필수)
+                .takenYear("23")
+                .takenSemester("1")
+                .member(testMember)
+                .course(course)
+                .majorType(MajorType.주전공)
+                .build();
 
         // then
         assertThat(take.getEffectiveCourse()).isEqualTo(course);
@@ -60,13 +60,13 @@ public class TakeTest {
     void take_객체_생성_테스트_CustomCourse_할당() {
         // when
         Take take = Take.builder()
-            .category(Category.전공선택)
-            .takenYear("23")
-            .takenSemester("1")
-            .member(testMember)
-            .customCourse(customCourse)
-            .majorType(MajorType.주전공)
-            .build();
+                .category(Category.전공선택)
+                .takenYear("23")
+                .takenSemester("1")
+                .member(testMember)
+                .customCourse(customCourse)
+                .majorType(MajorType.주전공)
+                .build();
 
         // then
         assertThat(take.getEffectiveCourse().getCode()).isEqualTo(customCourse.getCode());
@@ -79,26 +79,26 @@ public class TakeTest {
     void take_객체_생성_실패_테스트() {
         // when & then : 둘 다 null일 때 예외 발생
         assertThatThrownBy(
-            () -> Take.builder()
-                .category(Category.전공필수)
-                .takenYear("23")
-                .takenSemester("1")
-                .member(testMember)
-                .majorType(MajorType.주전공)
-                .build()
+                () -> Take.builder()
+                        .category(Category.전공필수)
+                        .takenYear("23")
+                        .takenSemester("1")
+                        .member(testMember)
+                        .majorType(MajorType.주전공)
+                        .build()
         ).isInstanceOf(GeneralException.class);
 
         // when & then :  둘 다 존재할 때 예외 발생
         assertThatThrownBy(
-            () -> Take.builder()
-                .category(Category.전공필수)
-                .takenYear("23")
-                .takenSemester("1")
-                .member(testMember)
-                .course(course)
-                .customCourse(customCourse)
-                .majorType(MajorType.주전공)
-                .build()
+                () -> Take.builder()
+                        .category(Category.전공필수)
+                        .takenYear("23")
+                        .takenSemester("1")
+                        .member(testMember)
+                        .course(course)
+                        .customCourse(customCourse)
+                        .majorType(MajorType.주전공)
+                        .build()
         ).isInstanceOf(GeneralException.class);
     }
 

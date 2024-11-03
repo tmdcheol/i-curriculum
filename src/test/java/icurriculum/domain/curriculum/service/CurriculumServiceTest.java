@@ -39,24 +39,24 @@ class CurriculumServiceTest {
     @BeforeEach
     void setUp() {
         Member member = Member.builder()
-            .joinYear(2021)
-            .build();
+                .joinYear(2021)
+                .build();
 
         Department department = Department.builder()
-            .name(DepartmentName.컴퓨터공학과)
-            .build();
+                .name(DepartmentName.컴퓨터공학과)
+                .build();
 
         memberMajor = MemberMajor.builder()
-            .member(member)
-            .department(department)
-            .majorType(MajorType.주전공)
-            .build();
+                .member(member)
+                .department(department)
+                .majorType(MajorType.주전공)
+                .build();
 
         decider = CurriculumDecider.builder()
-            .majorType(MajorType.주전공)
-            .departmentName(department.getName())
-            .joinYear(2021)
-            .build();
+                .majorType(MajorType.주전공)
+                .departmentName(department.getName())
+                .joinYear(2021)
+                .build();
     }
 
     @Test
@@ -64,31 +64,31 @@ class CurriculumServiceTest {
         // given
         Curriculum curriculum = mock(Curriculum.class);
         when(curriculumRepository.findByDecider(decider))
-            .thenReturn(Optional.of(curriculum));
+                .thenReturn(Optional.of(curriculum));
 
         // when
         curriculumService.getCurriculumByMemberMajor(memberMajor);
 
         // then
         verify(curriculumRepository, times(1))
-            .findByDecider(any(CurriculumDecider.class));
+                .findByDecider(any(CurriculumDecider.class));
         verify(curriculum, times(1))
-            .validate();
+                .validate();
     }
 
     @Test
     void 커리큘럼_조회_실패() {
         // given
         when(curriculumRepository.findByDecider(any(CurriculumDecider.class)))
-            .thenReturn(Optional.empty());
+                .thenReturn(Optional.empty());
 
         // when & then
         GeneralException exception = assertThrows(
-            GeneralException.class,
-            () -> curriculumService.getCurriculumByMemberMajor(memberMajor)
+                GeneralException.class,
+                () -> curriculumService.getCurriculumByMemberMajor(memberMajor)
         );
 
         verify(curriculumRepository, times(1))
-            .findByDecider(any(CurriculumDecider.class));
+                .findByDecider(any(CurriculumDecider.class));
     }
 }

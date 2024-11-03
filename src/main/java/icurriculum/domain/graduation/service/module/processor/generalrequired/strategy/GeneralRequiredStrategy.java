@@ -8,8 +8,8 @@ import java.util.LinkedList;
 public interface GeneralRequiredStrategy {
 
     ProcessorResponse.GeneralRequiredDTO execute(
-        ProcessorRequest.GeneralRequiredDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.GeneralRequiredDTO request,
+            LinkedList<Take> allTakeList
     );
 
 }

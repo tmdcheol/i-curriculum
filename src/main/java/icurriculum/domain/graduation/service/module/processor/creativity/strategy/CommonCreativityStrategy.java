@@ -23,26 +23,26 @@ public class CommonCreativityStrategy implements CreativityStrategy {
      */
     @Override
     public ProcessorResponse.CreativityDTO execute(
-        ProcessorRequest.CreativityDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.CreativityDTO request,
+            LinkedList<Take> allTakeList
     ) {
         CreativityResult result = new CreativityResult();
 
         handleResult(
-            allTakeList,
-            request.creativity(),
-            request.alternativeCourse(),
-            result
+                allTakeList,
+                request.creativity(),
+                request.alternativeCourse(),
+                result
         );
 
         return ProcessorConverter.to(result);
     }
 
     private void handleResult(
-        LinkedList<Take> allTakeList,
-        Creativity creativity,
-        AlternativeCourse alternativeCourse,
-        CreativityResult result
+            LinkedList<Take> allTakeList,
+            Creativity creativity,
+            AlternativeCourse alternativeCourse,
+            CreativityResult result
     ) {
         Iterator<Take> iterator = allTakeList.iterator();
         while (iterator.hasNext()) {
@@ -54,9 +54,9 @@ public class CommonCreativityStrategy implements CreativityStrategy {
             }
 
             if (GraduationUtils.isCodeAlternative(
-                take,
-                creativity.getApprovedCodeSet(),
-                alternativeCourse
+                    take,
+                    creativity.getApprovedCodeSet(),
+                    alternativeCourse
             )) {
                 result.update(take, iterator);
             }

@@ -26,11 +26,11 @@ public class MemberMajorService {
     }
 
     public MemberMajor getMemberMajorByMemberAndMajorType(
-        Member member,
-        MajorType majorType
+            Member member,
+            MajorType majorType
     ) {
         return repository.findByMemberAndMajorType(member, majorType)
-            .orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_MAJOR_NOT_FOUND));
+                .orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_MAJOR_NOT_FOUND));
     }
 
 

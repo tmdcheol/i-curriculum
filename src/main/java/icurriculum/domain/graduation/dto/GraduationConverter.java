@@ -10,8 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 public abstract class GraduationConverter {
 
     public static GraduationResponse.AllDTO toAllDTO(
-        List<Object> DTOList,
-        final int totalCompletedCredit
+            List<Object> DTOList,
+            final int totalCompletedCredit
     ) {
         for (Object o : DTOList) {
             if (o instanceof GraduationResponse.MainDTO response) {
@@ -38,13 +38,13 @@ public abstract class GraduationConverter {
     }
 
     public static GraduationResponse.MainDTO toMainDTO(
-        ProcessorResponse.SwAiDTO swAiDTO,
-        ProcessorResponse.CreativityDTO creativityDTO,
-        ProcessorResponse.CoreDTO coreDTO,
-        ProcessorResponse.MajorRequiredDTO majorRequiredDTO,
-        ProcessorResponse.MajorSelectDTO majorSelectDTO,
-        ProcessorResponse.GeneralRequiredDTO generalRequiredDTO,
-        final int totalNeedCredit
+            ProcessorResponse.SwAiDTO swAiDTO,
+            ProcessorResponse.CreativityDTO creativityDTO,
+            ProcessorResponse.CoreDTO coreDTO,
+            ProcessorResponse.MajorRequiredDTO majorRequiredDTO,
+            ProcessorResponse.MajorSelectDTO majorSelectDTO,
+            ProcessorResponse.GeneralRequiredDTO generalRequiredDTO,
+            final int totalNeedCredit
     ) {
         log.info("swAi: {}", swAiDTO);
         log.info("creativity: {}", creativityDTO);
@@ -55,12 +55,12 @@ public abstract class GraduationConverter {
         log.info("totalNeedCredit: {}", totalNeedCredit);
 
         return new MainDTO(
-            swAiDTO,
-            creativityDTO, coreDTO,
-            majorRequiredDTO,
-            majorSelectDTO,
-            generalRequiredDTO,
-            totalNeedCredit
+                swAiDTO,
+                creativityDTO, coreDTO,
+                majorRequiredDTO,
+                majorSelectDTO,
+                generalRequiredDTO,
+                totalNeedCredit
         );
     }
 }

@@ -18,9 +18,9 @@ public class SwAiTest {
     void 빌더로_SwAi_객체_생성시_성공_테스트() {
         // given
         SwAi swAi = SwAi.builder()
-            .approvedCodeSet(Set.of("CEE1101", "CEE1102"))
-            .requiredCredit(3)
-            .build();
+                .approvedCodeSet(Set.of("CEE1101", "CEE1102"))
+                .requiredCredit(3)
+                .build();
 
         // then
         assertThat(swAi.getApprovedCodeSet()).containsExactlyInAnyOrder("CEE1101", "CEE1102");
@@ -37,18 +37,18 @@ public class SwAiTest {
         Set<String> areaAlternativeCodeSet = Set.of("ACE2105", "ACE2103");
 
         SwAi swAi = SwAi.builder()
-            .approvedCodeSet(approvedCodeSet)
-            .areaAlternativeCodeSet(areaAlternativeCodeSet)
-            .requiredCredit(3)
-            .build();
+                .approvedCodeSet(approvedCodeSet)
+                .areaAlternativeCodeSet(areaAlternativeCodeSet)
+                .requiredCredit(3)
+                .build();
 
         // when & then
         assertThat(swAi.getApprovedCodeSet())
-            .containsExactlyInAnyOrder("CEE1101", "CEE1102");
+                .containsExactlyInAnyOrder("CEE1101", "CEE1102");
         assertThat(swAi.getAreaAlternativeCodeSet())
-            .containsExactlyInAnyOrder("ACE2105", "ACE2103");
+                .containsExactlyInAnyOrder("ACE2105", "ACE2103");
         assertThat(swAi.getRequiredCredit())
-            .isEqualTo(3);
+                .isEqualTo(3);
     }
 
     @Test
@@ -59,10 +59,10 @@ public class SwAiTest {
         additionalInfo.put("key", "value");
 
         SwAi swAi = SwAi.builder()
-            .requiredCredit(3)
-            .approvedCodeSet(Set.of("CEE1101", "CEE1102"))
-            .additionalInfoMap(additionalInfo)
-            .build();
+                .requiredCredit(3)
+                .approvedCodeSet(Set.of("CEE1101", "CEE1102"))
+                .additionalInfoMap(additionalInfo)
+                .build();
 
         // then
         assertThat(swAi.getApprovedCodeSet()).containsExactlyInAnyOrder("CEE1101", "CEE1102");
@@ -75,15 +75,15 @@ public class SwAiTest {
     void 유효성_검사_실패시_예외_발생_테스트() {
         // when & then
         assertThatThrownBy(() -> SwAi.builder()
-            .requiredCredit(3)
-            .build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
+                .requiredCredit(3)
+                .build())
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
 
         assertThatThrownBy(() -> SwAi.builder()
-            .approvedCodeSet(Set.of("CEE1101"))
-            .build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
+                .approvedCodeSet(Set.of("CEE1101"))
+                .build())
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
     }
 }

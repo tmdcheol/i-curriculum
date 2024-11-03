@@ -14,17 +14,17 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GeneralException.class)
     public ResponseEntity<ApiResponse<Object>> handleGeneralException(GeneralException ex) {
         log.error("Error Code: {}, Message: {}, Data: {}",
-            ex.getErrorStatus().getCode(),
-            ex.getErrorStatus().getMessage(),
-            ex.getData() != null ? ex.getData() : "No additional data",
-            ex
+                ex.getErrorStatus().getCode(),
+                ex.getErrorStatus().getMessage(),
+                ex.getData() != null ? ex.getData() : "No additional data",
+                ex
         );
 
         return ResponseEntity
-            .status(ex.getErrorStatus().getHttpStatus())
-            .body(ApiResponse.onFailure(
-                ex.getErrorStatus(),
-                ex.getData()
-            ));
+                .status(ex.getErrorStatus().getHttpStatus())
+                .body(ApiResponse.onFailure(
+                        ex.getErrorStatus(),
+                        ex.getData()
+                ));
     }
 }

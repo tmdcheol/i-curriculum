@@ -14,9 +14,9 @@ public class MajorRequiredStrategyConfig {
 
     @Bean
     public Map<DepartmentName, MajorRequiredStrategy> majorRequiredStrategyMap(
-        List<MajorRequiredStrategy> strategyList) {
+            List<MajorRequiredStrategy> strategyList) {
         Map<DepartmentName, MajorRequiredStrategy> strategyMap = new EnumMap<>(
-            DepartmentName.class);
+                DepartmentName.class);
 
         for (MajorRequiredStrategy strategy : strategyList) {
 

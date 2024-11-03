@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/curriculum")
 @RequiredArgsConstructor
 public class AdminCurriculumRenderingController {
+
     @GetMapping()
-    public String showCurriculumPage(){return "admin-curriculum";}
+    public String showCurriculumPage() {
+        return "admin-curriculum";
+    }
 }

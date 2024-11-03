@@ -9,13 +9,13 @@ public abstract class GraduationResponse {
     }
 
     public record MainDTO(
-        ProcessorResponse.SwAiDTO swAiDTO,
-        ProcessorResponse.CreativityDTO creativityDTO,
-        ProcessorResponse.CoreDTO coreDTO,
-        ProcessorResponse.MajorRequiredDTO majorRequiredDTO,
-        ProcessorResponse.MajorSelectDTO majorSelectDTO,
-        ProcessorResponse.GeneralRequiredDTO generalRequiredDTO,
-        int totalNeedCredit
+            ProcessorResponse.SwAiDTO swAiDTO,
+            ProcessorResponse.CreativityDTO creativityDTO,
+            ProcessorResponse.CoreDTO coreDTO,
+            ProcessorResponse.MajorRequiredDTO majorRequiredDTO,
+            ProcessorResponse.MajorSelectDTO majorSelectDTO,
+            ProcessorResponse.GeneralRequiredDTO generalRequiredDTO,
+            int totalNeedCredit
     ) {
 
     }

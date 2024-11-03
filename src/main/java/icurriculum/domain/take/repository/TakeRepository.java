@@ -11,17 +11,17 @@ import org.springframework.data.repository.query.Param;
 public interface TakeRepository extends JpaRepository<Take, Long> {
 
     @Query("SELECT t FROM Take t " +
-        "LEFT JOIN FETCH t.course c " +
-        "WHERE t.member = :member")
+            "LEFT JOIN FETCH t.course c " +
+            "WHERE t.member = :member")
     List<Take> findByMember(@Param("member") Member member);
 
     @Query("SELECT t FROM Take t " +
-        "LEFT JOIN FETCH t.course c " +
-        "WHERE t.member = :member " +
-        "AND t.majorType = :majorType")
+            "LEFT JOIN FETCH t.course c " +
+            "WHERE t.member = :member " +
+            "AND t.majorType = :majorType")
     List<Take> findByMemberAndMajorType(
-        @Param("member") Member member,
-        @Param("majorType") MajorType majorType
+            @Param("member") Member member,
+            @Param("majorType") MajorType majorType
     );
 
 }

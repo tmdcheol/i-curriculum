@@ -1,4 +1,5 @@
 package icurriculum.domain.curriculum.service;
+
 import icurriculum.domain.curriculum.Curriculum;
 import icurriculum.domain.curriculum.CurriculumDecider;
 import icurriculum.domain.curriculum.repository.CurriculumRepository;
@@ -18,20 +19,22 @@ public class AdminCurriculumService {
 
     public Curriculum getCurriculumByDecider(CurriculumDecider decider) {
         Curriculum curriculum = repository.findByDecider(decider)
-            .orElseThrow(() -> new GeneralException(ErrorStatus.CURRICULUM_NOT_FOUND));
+                .orElseThrow(() -> new GeneralException(ErrorStatus.CURRICULUM_NOT_FOUND));
         curriculum.validate();
 
         return curriculum;
     }
-    public CurriculumDecider convertToDecider(MajorType majorType, DepartmentName departmentName, Integer joinYear) {
+
+    public CurriculumDecider convertToDecider(MajorType majorType, DepartmentName departmentName,
+            Integer joinYear) {
         return CurriculumDecider.builder().majorType(majorType)
                 .departmentName(departmentName)
                 .joinYear(joinYear).build();
     }
 
-    public String createCurriculum(Curriculum curriculum, CurriculumDecider decider){
+    public String createCurriculum(Curriculum curriculum, CurriculumDecider decider) {
         Optional<Curriculum> existingCurriculumOptional = repository.findByDecider(decider);
-        if(existingCurriculumOptional.isPresent()){
+        if (existingCurriculumOptional.isPresent()) {
             return "duplicate";
         }
         Curriculum newCurriculum = Curriculum.builder()
@@ -50,7 +53,7 @@ public class AdminCurriculumService {
         return "새로운 커리큘럼 등록 성공!";
     }
 
-    public void deleteCurriculum(CurriculumDecider curriculumDecider){
+    public void deleteCurriculum(CurriculumDecider curriculumDecider) {
         Curriculum curriculum = getCurriculumByDecider(curriculumDecider);
         repository.delete(curriculum);
     }

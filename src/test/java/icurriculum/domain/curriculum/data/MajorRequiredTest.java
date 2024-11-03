@@ -21,8 +21,8 @@ public class MajorRequiredTest {
         Set<String> codeSet = Set.of("ABC1234", "ABC1235");
 
         MajorRequired majorRequired = MajorRequired.builder()
-            .codeSet(codeSet)
-            .build();
+                .codeSet(codeSet)
+                .build();
 
         // when & then
         assertThat(majorRequired.getCodeSet()).containsExactlyInAnyOrder("ABC1234", "ABC1235");
@@ -36,9 +36,9 @@ public class MajorRequiredTest {
         additionalInfo.put("credits", 3);
 
         MajorRequired majorRequired = MajorRequired.builder()
-            .codeSet(Set.of("ABC1234", "ABC1235"))
-            .additionalInfoMap(additionalInfo)
-            .build();
+                .codeSet(Set.of("ABC1234", "ABC1235"))
+                .additionalInfoMap(additionalInfo)
+                .build();
 
         // then
         assertThat(majorRequired.getAdditionalInfo("credits")).contains(3);
@@ -50,9 +50,9 @@ public class MajorRequiredTest {
     void 유효성_검사_실패시_예외_발생_테스트() {
         // then
         assertThatThrownBy(() -> MajorRequired.builder()
-            .codeSet(Set.of())
-            .build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
+                .codeSet(Set.of())
+                .build())
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
     }
 }

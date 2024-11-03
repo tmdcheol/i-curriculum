@@ -9,13 +9,13 @@ import java.util.List;
 public abstract class MemberMajorUtils {
 
     public static MemberMajor extractMemberMajorByMajorType(
-        List<MemberMajor> memberMajorList,
-        MajorType majorType
+            List<MemberMajor> memberMajorList,
+            MajorType majorType
     ) {
         return memberMajorList.stream()
-            .filter(mm -> mm.getMajorType() == majorType)
-            .findAny()
-            .orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_MAJOR_NOT_FOUND));
+                .filter(mm -> mm.getMajorType() == majorType)
+                .findAny()
+                .orElseThrow(() -> new GeneralException(ErrorStatus.MEMBER_MAJOR_NOT_FOUND));
     }
 
 }

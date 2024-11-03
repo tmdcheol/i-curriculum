@@ -33,7 +33,7 @@ class DepartmentRepositoryTest {
 
         // when & then
         assertThrows(DataIntegrityViolationException.class,
-            () -> departmentRepository.save(department));
+                () -> departmentRepository.save(department));
     }
 
 }

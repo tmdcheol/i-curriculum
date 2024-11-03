@@ -37,10 +37,10 @@ class CourseRepositoryTest {
         String code = "ACE2102";
         Integer credit = 3;
         Course course = Course.builder()
-            .name(name)
-            .code(code)
-            .credit(credit)
-            .build();
+                .name(name)
+                .code(code)
+                .credit(credit)
+                .build();
 
         // when
         Course savedCourse = courseRepository.save(course);
@@ -60,7 +60,7 @@ class CourseRepositoryTest {
 
         // when & then
         assertThrows(DataIntegrityViolationException.class,
-            () -> courseRepository.save(course));
+                () -> courseRepository.save(course));
     }
 
     @Test
@@ -103,7 +103,7 @@ class CourseRepositoryTest {
         // then
         assertThat(foundCourses).hasSize(2);
         assertThat(foundCourses).extracting(Course::getCode)
-            .containsExactlyInAnyOrder("GEB1112", "GEB1114");
+                .containsExactlyInAnyOrder("GEB1112", "GEB1114");
     }
 
 

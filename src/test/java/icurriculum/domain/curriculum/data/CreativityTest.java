@@ -21,9 +21,9 @@ public class CreativityTest {
 
         // when
         Creativity creativity = Creativity.builder()
-            .approvedCodeSet(approvedCodeSet)
-            .requiredCredit(3)
-            .build();
+                .approvedCodeSet(approvedCodeSet)
+                .requiredCredit(3)
+                .build();
 
         // then
         assertThat(creativity.getApprovedCodeSet()).containsExactlyInAnyOrder("CRE4302", "CRE4303");
@@ -40,10 +40,10 @@ public class CreativityTest {
 
         // when
         Creativity creativity = Creativity.builder()
-            .requiredCredit(3)
-            .approvedCodeSet(Set.of("CRE4302", "CRE4303"))
-            .additionalInfoMap(additionalInfo)
-            .build();
+                .requiredCredit(3)
+                .approvedCodeSet(Set.of("CRE4302", "CRE4303"))
+                .additionalInfoMap(additionalInfo)
+                .build();
 
         // then
         assertThat(creativity.getAdditionalInfo("a")).contains("b");
@@ -56,17 +56,17 @@ public class CreativityTest {
     void 유효성_검사_실패시_예외_발생_테스트() {
         // when & then
         assertThatThrownBy(
-            () -> Creativity.builder()
-                .approvedCodeSet(Set.of("CRE4302", "CRE4303"))
-                .build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
+                () -> Creativity.builder()
+                        .approvedCodeSet(Set.of("CRE4302", "CRE4303"))
+                        .build())
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
 
         assertThatThrownBy(
-            () -> Creativity.builder()
-                .requiredCredit(3)
-                .build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
+                () -> Creativity.builder()
+                        .requiredCredit(3)
+                        .build())
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
     }
 }

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public interface CreativityStrategy {
 
     ProcessorResponse.CreativityDTO execute(
-        ProcessorRequest.CreativityDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.CreativityDTO request,
+            LinkedList<Take> allTakeList
     );
 }

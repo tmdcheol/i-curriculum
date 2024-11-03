@@ -28,7 +28,8 @@ public class CourseController {
             Member member,
             @RequestBody CourseRequest.SimpleInfoDTO request) {
         MajorType majorType = MajorType.valueOf(request.getMajorType());
-        MemberMajor memberMajor = memberMajorService.getMemberMajorByMemberAndMajorType(member,majorType);
+        MemberMajor memberMajor = memberMajorService.getMemberMajorByMemberAndMajorType(member,
+                majorType);
         DetailInfoDTO course = courseService.getCourse(request.getCode(), memberMajor);
 
         return ApiResponse.onSuccess(course);

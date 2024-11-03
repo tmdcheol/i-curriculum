@@ -44,11 +44,11 @@ public class AllGraduationService {
 
     public GraduationResponse.AllDTO executeAll(Member member) {
         List<MemberMajor> memberMajorList = memberMajorService
-            .getMemberMajorListByMember(member);
+                .getMemberMajorListByMember(member);
 
         List<Object> dtoList = memberMajorList.stream()
-            .map(memberMajor -> execute(memberMajor, member))
-            .collect(Collectors.toList());
+                .map(memberMajor -> execute(memberMajor, member))
+                .collect(Collectors.toList());
 
         /**
          * Todo
@@ -58,15 +58,15 @@ public class AllGraduationService {
         return GraduationConverter.toAllDTO(dtoList, totalCompletedCredit);
     }
 
-    private int calculateTotalCompletedCredit(Member member){
+    private int calculateTotalCompletedCredit(Member member) {
         List<Take> alltakeList = takeService.getTakeListByMember(member);
         return TakeUtils.calculateTotalCredit(alltakeList);
     }
 
     @SuppressWarnings("unchecked")
     private <T> T execute(
-        MemberMajor memberMajor,
-        Member member
+            MemberMajor memberMajor,
+            Member member
     ) {
         if (memberMajor.getMajorType() == MajorType.주전공) {
             return (T) mainGraduationService.execute(member);

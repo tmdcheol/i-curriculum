@@ -13,16 +13,16 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class MajorSelectProcessor implements
-    Processor<MajorSelectDTO, ProcessorResponse.MajorSelectDTO> {
+        Processor<MajorSelectDTO, ProcessorResponse.MajorSelectDTO> {
 
     private final Map<DepartmentName, MajorSelectStrategy> majorSelectStrategyMap;
 
     @Override
     public ProcessorResponse.MajorSelectDTO execute(
-        ProcessorRequest.MajorSelectDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.MajorSelectDTO request,
+            LinkedList<Take> allTakeList
     ) {
         return majorSelectStrategyMap.get(request.departmentName())
-            .execute(request, allTakeList);
+                .execute(request, allTakeList);
     }
 }

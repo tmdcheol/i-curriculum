@@ -38,8 +38,8 @@ class MainGraduationServiceTest {
     @BeforeEach
     void setUp() {
         testMember = memberRepository
-            .findById(1L)
-            .orElseThrow();
+                .findById(1L)
+                .orElseThrow();
     }
 
     @Test

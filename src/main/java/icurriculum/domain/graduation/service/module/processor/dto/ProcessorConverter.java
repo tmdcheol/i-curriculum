@@ -11,65 +11,65 @@ import icurriculum.domain.graduation.service.module.processor.swai.SwAiResult;
 public abstract class ProcessorConverter {
 
     public static ProcessorResponse.SwAiDTO to(
-        SwAiResult result
+            SwAiResult result
     ) {
         return new SwAiDTO(
-            result.getCompletedCredit(),
-            result.getRequiredCredit(),
-            result.isClear()
+                result.getCompletedCredit(),
+                result.getRequiredCredit(),
+                result.isClear()
         );
     }
 
     public static ProcessorResponse.CoreDTO to(
-        CoreResult result
+            CoreResult result
     ) {
         return new CoreDTO(
-            result.getCompletedCredit(),
-            result.getRequiredCredit(),
-            result.getUncompletedArea(),
-            result.isClear()
+                result.getCompletedCredit(),
+                result.getRequiredCredit(),
+                result.getUncompletedArea(),
+                result.isClear()
         );
     }
 
     public static ProcessorResponse.CreativityDTO to(
-        CreativityResult result
+            CreativityResult result
     ) {
         return new CreativityDTO(
-            result.getCompletedCredit(),
-            result.getRequiredCredit(),
-            result.isClear()
+                result.getCompletedCredit(),
+                result.getRequiredCredit(),
+                result.isClear()
         );
     }
 
     public static ProcessorResponse.GeneralRequiredDTO to(
-        GeneralRequiredResult result
+            GeneralRequiredResult result
     ) {
         return new GeneralRequiredDTO(
-            result.getCompletedCredit(),
-            result.getRequiredCredit(),
-            result.getUncompletedCourseSet(),
-            result.isClear()
+                result.getCompletedCredit(),
+                result.getRequiredCredit(),
+                result.getUncompletedCourseSet(),
+                result.isClear()
         );
     }
 
     public static ProcessorResponse.MajorRequiredDTO to(
-        MajorRequiredResult result
+            MajorRequiredResult result
     ) {
         return new MajorRequiredDTO(
-            result.getCompletedCredit(),
-            result.getRequiredCredit(),
-            result.getUncompletedCourseList(),
-            result.isClear()
+                result.getCompletedCredit(),
+                result.getRequiredCredit(),
+                result.getUncompletedCourseList(),
+                result.isClear()
         );
     }
 
     public static ProcessorResponse.MajorSelectDTO to(
-        MajorSelectResult result
+            MajorSelectResult result
     ) {
         return new MajorSelectDTO(
-            result.getTotalMajorCompletedCredit(),
-            result.getTotalMajorRequiredCredit(),
-            result.isClear()
+                result.getTotalMajorCompletedCredit(),
+                result.getTotalMajorRequiredCredit(),
+                result.isClear()
         );
     }
 

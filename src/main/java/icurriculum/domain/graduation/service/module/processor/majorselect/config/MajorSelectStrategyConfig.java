@@ -14,7 +14,7 @@ public class MajorSelectStrategyConfig {
 
     @Bean
     public Map<DepartmentName, MajorSelectStrategy> majorSelectStrategyMap(
-        List<MajorSelectStrategy> strategyList
+            List<MajorSelectStrategy> strategyList
     ) {
         Map<DepartmentName, MajorSelectStrategy> strategyMap = new EnumMap<>(DepartmentName.class);
 

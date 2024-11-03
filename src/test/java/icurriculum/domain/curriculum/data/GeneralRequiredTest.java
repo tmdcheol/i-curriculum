@@ -20,8 +20,8 @@ public class GeneralRequiredTest {
         Set<String> codeSet = Set.of("ABC1001", "ABC1002");
 
         GeneralRequired generalRequired = GeneralRequired.builder()
-            .codeSet(codeSet)
-            .build();
+                .codeSet(codeSet)
+                .build();
 
         // when & then
         assertThat(generalRequired.getCodeSet()).containsExactlyInAnyOrder("ABC1001", "ABC1002");
@@ -37,9 +37,9 @@ public class GeneralRequiredTest {
 
         // when
         GeneralRequired generalRequired = GeneralRequired.builder()
-            .codeSet(Set.of("CRE4302", "CRE4303"))
-            .additionalInfoMap(additionalInfo)
-            .build();
+                .codeSet(Set.of("CRE4302", "CRE4303"))
+                .additionalInfoMap(additionalInfo)
+                .build();
 
         // then
         assertThat(generalRequired.getAdditionalInfo("a")).contains("b");
@@ -53,8 +53,8 @@ public class GeneralRequiredTest {
 
         // then
         assertThatThrownBy(() -> GeneralRequired.builder()
-            .build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
+                .build())
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
     }
 }

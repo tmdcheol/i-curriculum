@@ -58,92 +58,92 @@ public class MainGraduationService {
 
         // 주전공 Take LinkedList 가져온다.
         LinkedList<Take> allTakeList = takeService
-            .getTakeListByMemberAndMajorType(member, MajorType.주전공);
+                .getTakeListByMemberAndMajorType(member, MajorType.주전공);
 
         // 주전공 가져온다.
         MemberMajor mainMemberMajor = memberMajorService
-            .getMemberMajorByMemberAndMajorType(member, MajorType.주전공);
+                .getMemberMajorByMemberAndMajorType(member, MajorType.주전공);
 
         // 주전공 졸업요건(Curriculum)을 가져온다.
         Curriculum mainCurriculum = curriculumService.getCurriculumByMemberMajor(mainMemberMajor);
 
         // SW_AI
         ProcessorResponse.SwAiDTO swAiDTO = executeProcessor(
-            ProcessorCategory.SW_AI,
-            ProcessorRequest.SwAiDTO.class,
-            mainCurriculum.getSwAi(),
-            mainCurriculum.getAlternativeCourse(),
-            mainMemberMajor.getDepartment().getName(),
-            member.getJoinYear(),
-            allTakeList
+                ProcessorCategory.SW_AI,
+                ProcessorRequest.SwAiDTO.class,
+                mainCurriculum.getSwAi(),
+                mainCurriculum.getAlternativeCourse(),
+                mainMemberMajor.getDepartment().getName(),
+                member.getJoinYear(),
+                allTakeList
         );
 
         // 창의
         ProcessorResponse.CreativityDTO creativityDTO = executeProcessor(
-            ProcessorCategory.창의,
-            ProcessorRequest.CreativityDTO.class,
-            mainCurriculum.getCreativity(),
-            mainCurriculum.getAlternativeCourse(),
-            mainMemberMajor.getDepartment().getName(),
-            member.getJoinYear(),
-            allTakeList
+                ProcessorCategory.창의,
+                ProcessorRequest.CreativityDTO.class,
+                mainCurriculum.getCreativity(),
+                mainCurriculum.getAlternativeCourse(),
+                mainMemberMajor.getDepartment().getName(),
+                member.getJoinYear(),
+                allTakeList
         );
 
         // 핵심교양
         ProcessorResponse.CoreDTO coreDTO = executeProcessor(
-            ProcessorCategory.핵심교양,
-            ProcessorRequest.CoreDTO.class,
-            mainCurriculum.getCore(),
-            mainCurriculum.getAlternativeCourse(),
-            mainMemberMajor.getDepartment().getName(),
-            member.getJoinYear(),
-            allTakeList
+                ProcessorCategory.핵심교양,
+                ProcessorRequest.CoreDTO.class,
+                mainCurriculum.getCore(),
+                mainCurriculum.getAlternativeCourse(),
+                mainMemberMajor.getDepartment().getName(),
+                member.getJoinYear(),
+                allTakeList
         );
 
         // 주전공-전공필수
         CourseListWithData<MajorRequired> majorRequiredData = createMajorRequiredData(
-            mainCurriculum.getMajorRequired()
+                mainCurriculum.getMajorRequired()
         );
 
         ProcessorResponse.MajorRequiredDTO majorRequiredDTO = executeProcessor(
-            ProcessorCategory.전공필수,
-            ProcessorRequest.MajorRequiredDTO.class,
-            majorRequiredData,
-            mainCurriculum.getAlternativeCourse(),
-            mainMemberMajor.getDepartment().getName(),
-            member.getJoinYear(),
-            allTakeList
+                ProcessorCategory.전공필수,
+                ProcessorRequest.MajorRequiredDTO.class,
+                majorRequiredData,
+                mainCurriculum.getAlternativeCourse(),
+                mainMemberMajor.getDepartment().getName(),
+                member.getJoinYear(),
+                allTakeList
         );
 
         // 주전공-전공선택, 이수한 전공학점 계산
         CreditWithData majorSelectData = new CreditWithData(
-            mainCurriculum.getMajorSelect(),
-            mainCurriculum.getRequiredCredit().getSingleNeedCredit(),
-            majorRequiredDTO.completedCredit()
+                mainCurriculum.getMajorSelect(),
+                mainCurriculum.getRequiredCredit().getSingleNeedCredit(),
+                majorRequiredDTO.completedCredit()
         );
 
         ProcessorResponse.MajorSelectDTO majorSelectDTO = executeProcessor(
-            ProcessorCategory.전공선택,
-            ProcessorRequest.MajorSelectDTO.class,
-            majorSelectData,
-            mainCurriculum.getAlternativeCourse(),
-            mainMemberMajor.getDepartment().getName(),
-            member.getJoinYear(),
-            allTakeList
+                ProcessorCategory.전공선택,
+                ProcessorRequest.MajorSelectDTO.class,
+                majorSelectData,
+                mainCurriculum.getAlternativeCourse(),
+                mainMemberMajor.getDepartment().getName(),
+                member.getJoinYear(),
+                allTakeList
         );
 
         // 주전공-교양필수
         CourseListWithData<GeneralRequired> generalRequiredData = createGeneralRequiredData(
-            mainCurriculum.getGeneralRequired()
+                mainCurriculum.getGeneralRequired()
         );
         ProcessorResponse.GeneralRequiredDTO generalRequiredDTO = executeProcessor(
-            ProcessorCategory.교양필수,
-            ProcessorRequest.GeneralRequiredDTO.class,
-            generalRequiredData,
-            mainCurriculum.getAlternativeCourse(),
-            mainMemberMajor.getDepartment().getName(),
-            member.getJoinYear(),
-            allTakeList
+                ProcessorCategory.교양필수,
+                ProcessorRequest.GeneralRequiredDTO.class,
+                generalRequiredData,
+                mainCurriculum.getAlternativeCourse(),
+                mainMemberMajor.getDepartment().getName(),
+                member.getJoinYear(),
+                allTakeList
         );
 
         // 교양선택 - 남은 수업 모두 교양선택인지 확인
@@ -151,37 +151,37 @@ public class MainGraduationService {
         final int totalNeedCredit = mainCurriculum.getRequiredCredit().getTotalNeedCredit();
 
         return GraduationConverter.toMainDTO(
-            swAiDTO,
-            creativityDTO,
-            coreDTO,
-            majorRequiredDTO,
-            majorSelectDTO,
-            generalRequiredDTO,
-            totalNeedCredit
+                swAiDTO,
+                creativityDTO,
+                coreDTO,
+                majorRequiredDTO,
+                majorSelectDTO,
+                generalRequiredDTO,
+                totalNeedCredit
         );
     }
 
     @SuppressWarnings("unchecked")
     private <R, T, P> R executeProcessor(
-        ProcessorCategory category,
-        Class<P> payloadClazz,
-        T data,
-        AlternativeCourse alternativeCourse,
-        DepartmentName departmentName,
-        Integer joinYear,
-        LinkedList<Take> allTakeList
+            ProcessorCategory category,
+            Class<P> payloadClazz,
+            T data,
+            AlternativeCourse alternativeCourse,
+            DepartmentName departmentName,
+            Integer joinYear,
+            LinkedList<Take> allTakeList
     ) {
         try {
             P payload = payloadClazz.getConstructor(
-                    data.getClass(),
-                    AlternativeCourse.class,
-                    DepartmentName.class,
-                    Integer.class
-                )
-                .newInstance(data, alternativeCourse, departmentName, joinYear);
+                            data.getClass(),
+                            AlternativeCourse.class,
+                            DepartmentName.class,
+                            Integer.class
+                    )
+                    .newInstance(data, alternativeCourse, departmentName, joinYear);
 
             return (R) ProcessorUtils.get(processorMap, category)
-                .execute(payload, allTakeList);
+                    .execute(payload, allTakeList);
         } catch (NoSuchMethodException |
                  InstantiationException |
                  IllegalAccessException |
@@ -192,7 +192,7 @@ public class MainGraduationService {
     }
 
     private CourseListWithData<MajorRequired> createMajorRequiredData(
-        MajorRequired majorRequired
+            MajorRequired majorRequired
     ) {
         Set<String> majorRequiredCodeSet = majorRequired.getCodeSet();
         List<Course> courseList = courseService.getCourseListByCodeSet(majorRequiredCodeSet);
@@ -201,7 +201,7 @@ public class MainGraduationService {
     }
 
     private CourseListWithData<GeneralRequired> createGeneralRequiredData(
-        GeneralRequired generalRequired
+            GeneralRequired generalRequired
     ) {
         Set<String> generalRequiredCodeSet = generalRequired.getCodeSet();
         List<Course> courseList = courseService.getCourseListByCodeSet(generalRequiredCodeSet);

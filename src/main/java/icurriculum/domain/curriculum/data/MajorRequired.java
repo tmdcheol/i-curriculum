@@ -35,14 +35,14 @@ public class MajorRequired {
 
     @Builder
     private MajorRequired(
-        Set<String> codeSet,
-        Map<String, Object> additionalInfoMap
+            Set<String> codeSet,
+            Map<String, Object> additionalInfoMap
     ) {
         this.codeSet = (codeSet != null) ?
-            codeSet : new HashSet<>();
+                codeSet : new HashSet<>();
 
         this.additionalInfoMap = (additionalInfoMap != null) ?
-            additionalInfoMap : new HashMap<>();
+                additionalInfoMap : new HashMap<>();
 
         validate();
     }

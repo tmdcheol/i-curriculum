@@ -18,7 +18,7 @@ public class GraduationController {
 
     @PostMapping("check-graduation")
     public ApiResponse<GraduationResponse.AllDTO> checkAll(
-        Member member
+            Member member
     ) {
 
         /**
@@ -29,7 +29,7 @@ public class GraduationController {
 
         Member testMember = testMemberRepository.findById(1L).get(); // 삭제 예정
         return ApiResponse.onSuccess(
-            allGraduationService.executeAll(testMember)
+                allGraduationService.executeAll(testMember)
         );
     }
 

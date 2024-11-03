@@ -7,8 +7,8 @@ public abstract class CourseUtils {
 
     public static int calculateTotalCredit(List<Course> courseList) {
         return courseList.stream()
-            .mapToInt(Course::getCredit)
-            .sum();
+                .mapToInt(Course::getCredit)
+                .sum();
     }
 
 }

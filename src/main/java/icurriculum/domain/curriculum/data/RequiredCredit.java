@@ -32,10 +32,10 @@ public class RequiredCredit {
 
     @Builder
     private RequiredCredit(
-        Integer totalNeedCredit,
-        Integer singleNeedCredit,
-        Integer secondNeedCredit,
-        Integer minorNeedCredit
+            Integer totalNeedCredit,
+            Integer singleNeedCredit,
+            Integer secondNeedCredit,
+            Integer minorNeedCredit
     ) {
         this.totalNeedCredit = totalNeedCredit;
         this.singleNeedCredit = singleNeedCredit;
@@ -47,7 +47,7 @@ public class RequiredCredit {
 
     public void validate() {
         if (totalNeedCredit == null || singleNeedCredit == null ||
-            secondNeedCredit == null || minorNeedCredit == null
+                secondNeedCredit == null || minorNeedCredit == null
         ) {
             throw new GeneralException(ErrorStatus.CURRICULUM_MISSING_VALUE, this);
         }

@@ -7,11 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 public class CourseRequest {
+
     @Getter
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
     public static class SimpleInfoDTO {
+
         String code;
         String majorType;
     }

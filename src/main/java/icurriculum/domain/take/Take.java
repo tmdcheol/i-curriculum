@@ -74,7 +74,7 @@ public class Take extends BaseRDBEntity {
      */
     @Builder
     private Take(Category category, String takenYear, String takenSemester, Member member,
-        Course course, CustomCourse customCourse, MajorType majorType) {
+            Course course, CustomCourse customCourse, MajorType majorType) {
         this.category = category;
         this.takenYear = takenYear;
         this.takenSemester = takenSemester;
@@ -113,10 +113,10 @@ public class Take extends BaseRDBEntity {
         }
         if (customCourse != null) {
             return Course.builder()
-                .code(customCourse.getCode())
-                .name(customCourse.getName())
-                .credit(customCourse.getCredit())
-                .build();
+                    .code(customCourse.getCode())
+                    .name(customCourse.getName())
+                    .credit(customCourse.getCredit())
+                    .build();
         }
         throw new GeneralException(ErrorStatus.TAKE_HAS_ABNORMAL_COURSE, this);
     }
@@ -131,28 +131,29 @@ public class Take extends BaseRDBEntity {
         }
         Take take = (Take) o;
         return Objects.equals(id, take.id) && getCategory() == take.getCategory() && Objects.equals(
-            takenYear, take.takenYear) && Objects.equals(takenSemester, take.takenSemester)
-            && Objects.equals(getMember(), take.getMember()) && Objects.equals(getEffectiveCourse(),
-            take.getEffectiveCourse());
+                takenYear, take.takenYear) && Objects.equals(takenSemester, take.takenSemester)
+                && Objects.equals(getMember(), take.getMember()) && Objects.equals(
+                getEffectiveCourse(),
+                take.getEffectiveCourse());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, getCategory(), takenYear, takenSemester, getMember(),
-            getEffectiveCourse());
+                getEffectiveCourse());
     }
 
     @Override
     public String toString() {
         return "Take{" +
-            "id=" + id +
-            ", category=" + category +
-            ", takenYear='" + takenYear + '\'' +
-            ", takenSemester='" + takenSemester + '\'' +
-            ", member=" + member +
-            ", course=" + course +
-            ", customCourse=" + customCourse +
-            ", majorType=" + majorType +
-            '}';
+                "id=" + id +
+                ", category=" + category +
+                ", takenYear='" + takenYear + '\'' +
+                ", takenSemester='" + takenSemester + '\'' +
+                ", member=" + member +
+                ", course=" + course +
+                ", customCourse=" + customCourse +
+                ", majorType=" + majorType +
+                '}';
     }
 }

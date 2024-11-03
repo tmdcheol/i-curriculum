@@ -8,48 +8,54 @@ import java.util.Set;
 public abstract class ProcessorResponse {
 
     public record SwAiDTO(
-        int completedCredit,
-        int requiredCredit,
-        boolean isClear
+            int completedCredit,
+            int requiredCredit,
+            boolean isClear
     ) {
+
     }
 
     public record CreativityDTO(
-        int completedCredit,
-        int requiredCredit,
-        boolean isClear
+            int completedCredit,
+            int requiredCredit,
+            boolean isClear
     ) {
+
     }
 
     public record CoreDTO(
-        int completedCredit,
-        int requiredCredit,
-        Set<Category> uncompletedArea,
-        boolean isClear
+            int completedCredit,
+            int requiredCredit,
+            Set<Category> uncompletedArea,
+            boolean isClear
     ) {
+
     }
 
     public record GeneralRequiredDTO(
-        int completedCredit,
-        int requiredCredit,
-        Set<Course> uncompletedCourseSet,
-        boolean isClear
+            int completedCredit,
+            int requiredCredit,
+            Set<Course> uncompletedCourseSet,
+            boolean isClear
     ) {
+
     }
 
     public record MajorRequiredDTO(
-        int completedCredit,
-        int requiredCredit,
-        List<Course> uncompletedCourseList,
-        boolean isClear
+            int completedCredit,
+            int requiredCredit,
+            List<Course> uncompletedCourseList,
+            boolean isClear
     ) {
+
     }
 
     public record MajorSelectDTO(
-        int totalMajorCompletedCredit,
-        int totalMajorRequiredCredit,
-        boolean isClear
+            int totalMajorCompletedCredit,
+            int totalMajorRequiredCredit,
+            boolean isClear
     ) {
+
     }
 
 

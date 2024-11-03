@@ -13,17 +13,17 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class CreativityProcessor implements
-    Processor<CreativityDTO, ProcessorResponse.CreativityDTO> {
+        Processor<CreativityDTO, ProcessorResponse.CreativityDTO> {
 
     private final Map<DepartmentName, CreativityStrategy> creativityStrategyMap;
 
     @Override
     public ProcessorResponse.CreativityDTO execute(
-        ProcessorRequest.CreativityDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.CreativityDTO request,
+            LinkedList<Take> allTakeList
     ) {
         return creativityStrategyMap.get(request.departmentName())
-            .execute(request, allTakeList);
+                .execute(request, allTakeList);
     }
 
 }

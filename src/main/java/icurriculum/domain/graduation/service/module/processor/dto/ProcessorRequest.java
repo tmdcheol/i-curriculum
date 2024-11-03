@@ -14,54 +14,54 @@ import java.util.List;
 public abstract class ProcessorRequest {
 
     public record SwAiDTO(
-        SwAi swAi,
-        AlternativeCourse alternativeCourse,
-        DepartmentName departmentName,
-        Integer joinYear
+            SwAi swAi,
+            AlternativeCourse alternativeCourse,
+            DepartmentName departmentName,
+            Integer joinYear
     ) {
 
     }
 
     public record CoreDTO(
-        Core core,
-        AlternativeCourse alternativeCourse,
-        DepartmentName departmentName,
-        Integer joinYear
+            Core core,
+            AlternativeCourse alternativeCourse,
+            DepartmentName departmentName,
+            Integer joinYear
     ) {
 
     }
 
     public record CreativityDTO(
-        Creativity creativity,
-        AlternativeCourse alternativeCourse,
-        DepartmentName departmentName,
-        Integer joinYear) {
+            Creativity creativity,
+            AlternativeCourse alternativeCourse,
+            DepartmentName departmentName,
+            Integer joinYear) {
 
     }
 
     public record GeneralRequiredDTO(
-        CourseListWithData<GeneralRequired> CourseListWithData,
-        AlternativeCourse alternativeCourse,
-        DepartmentName departmentName,
-        Integer joinYear
+            CourseListWithData<GeneralRequired> CourseListWithData,
+            AlternativeCourse alternativeCourse,
+            DepartmentName departmentName,
+            Integer joinYear
     ) {
 
     }
 
     public record MajorRequiredDTO(
-        CourseListWithData<MajorRequired> CourseListWithData,
-        AlternativeCourse alternativeCourse,
-        DepartmentName departmentName,
-        Integer joinYear
+            CourseListWithData<MajorRequired> CourseListWithData,
+            AlternativeCourse alternativeCourse,
+            DepartmentName departmentName,
+            Integer joinYear
     ) {
 
     }
 
     public record MajorSelectDTO(
-        CreditWithData creditWithData,
-        AlternativeCourse alternativeCourse,
-        DepartmentName departmentName,
-        Integer joinYear
+            CreditWithData creditWithData,
+            AlternativeCourse alternativeCourse,
+            DepartmentName departmentName,
+            Integer joinYear
     ) {
 
     }
@@ -73,8 +73,8 @@ public abstract class ProcessorRequest {
      * - data(MajorRequired or GeneralRequired): Set<String> 형태의 커리큘럼 과목 코드(크롤러), 추가 정보(임의로 자유롭게 가능)
      */
     public record CourseListWithData<T>(
-        List<Course> essentialCourseList,
-        T data
+            List<Course> essentialCourseList,
+            T data
     ) {
 
     }
@@ -87,9 +87,9 @@ public abstract class ProcessorRequest {
      * - 전공필수 계산된 이수학점 -> 전공필요학점 충족 확인에 필요
      */
     public record CreditWithData(
-        MajorSelect majorSelect,
-        int majorNeedCredit,
-        int majorRequiredCompletedCredit
+            MajorSelect majorSelect,
+            int majorNeedCredit,
+            int majorRequiredCompletedCredit
     ) {
 
     }

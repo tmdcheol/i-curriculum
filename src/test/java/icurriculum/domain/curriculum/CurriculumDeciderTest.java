@@ -17,18 +17,18 @@ public class CurriculumDeciderTest {
     void 빌더로_CurriculumDecider_객체_생성시_필드_설정_테스트() {
         // given
         CurriculumDecider curriculumDecider = CurriculumDecider.builder()
-            .majorType(MajorType.주전공)
-            .departmentName(DepartmentName.컴퓨터공학과)
-            .joinYear(2021)
-            .build();
+                .majorType(MajorType.주전공)
+                .departmentName(DepartmentName.컴퓨터공학과)
+                .joinYear(2021)
+                .build();
 
         // then
         assertThat(curriculumDecider.getMajorType())
-            .isEqualTo(MajorType.주전공);
+                .isEqualTo(MajorType.주전공);
         assertThat(curriculumDecider.getDepartmentName())
-            .isEqualTo(DepartmentName.컴퓨터공학과);
+                .isEqualTo(DepartmentName.컴퓨터공학과);
         assertThat(curriculumDecider.getJoinYear())
-            .isEqualTo(2021);
+                .isEqualTo(2021);
     }
 
     @Test
@@ -36,12 +36,12 @@ public class CurriculumDeciderTest {
     void 유효성_검사_실패시_예외_발생_테스트_majorType_null() {
         // when & then
         assertThatThrownBy(() -> CurriculumDecider.builder()
-            .departmentName(DepartmentName.컴퓨터공학과)
-            .joinYear(2021)
-            .build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus",
-                ErrorStatus.CURRICULUM_DECIDER_MISSING_VALUE);
+                .departmentName(DepartmentName.컴퓨터공학과)
+                .joinYear(2021)
+                .build())
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus",
+                        ErrorStatus.CURRICULUM_DECIDER_MISSING_VALUE);
     }
 
     @Test
@@ -49,12 +49,12 @@ public class CurriculumDeciderTest {
     void 유효성_검사_실패시_예외_발생_테스트_departmentName_null() {
         // when & then
         assertThatThrownBy(() -> CurriculumDecider.builder()
-            .majorType(MajorType.주전공)
-            .joinYear(2021)
-            .build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus",
-                ErrorStatus.CURRICULUM_DECIDER_MISSING_VALUE);
+                .majorType(MajorType.주전공)
+                .joinYear(2021)
+                .build())
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus",
+                        ErrorStatus.CURRICULUM_DECIDER_MISSING_VALUE);
     }
 
     @Test
@@ -62,11 +62,11 @@ public class CurriculumDeciderTest {
     void 유효성_검사_실패시_예외_발생_테스트_joinYear_null() {
         // when & then
         assertThatThrownBy(() -> CurriculumDecider.builder()
-            .majorType(MajorType.주전공)
-            .departmentName(DepartmentName.컴퓨터공학과)
-            .build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus",
-                ErrorStatus.CURRICULUM_DECIDER_MISSING_VALUE);
+                .majorType(MajorType.주전공)
+                .departmentName(DepartmentName.컴퓨터공학과)
+                .build())
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus",
+                        ErrorStatus.CURRICULUM_DECIDER_MISSING_VALUE);
     }
 }

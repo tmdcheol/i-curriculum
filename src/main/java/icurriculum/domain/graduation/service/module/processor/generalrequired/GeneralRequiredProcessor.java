@@ -17,16 +17,16 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class GeneralRequiredProcessor implements
-    Processor<GeneralRequiredDTO, ProcessorResponse.GeneralRequiredDTO> {
+        Processor<GeneralRequiredDTO, ProcessorResponse.GeneralRequiredDTO> {
 
     private final Map<DepartmentName, GeneralRequiredStrategy> generalRequiredStrategyMap;
 
     @Override
     public ProcessorResponse.GeneralRequiredDTO execute(
-        ProcessorRequest.GeneralRequiredDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.GeneralRequiredDTO request,
+            LinkedList<Take> allTakeList
     ) {
         return generalRequiredStrategyMap.get(request.departmentName())
-            .execute(request, allTakeList);
+                .execute(request, allTakeList);
     }
 }

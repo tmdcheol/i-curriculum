@@ -30,11 +30,11 @@ class ProcessorUtilsTest {
         Processor<?, ?> swAiProcessor = ProcessorUtils.get(processorMap, ProcessorCategory.SW_AI);
         Processor<?, ?> coreProcessor = ProcessorUtils.get(processorMap, ProcessorCategory.핵심교양);
         Processor<?, ?> generalRequiredProcessor = ProcessorUtils.get(processorMap,
-            ProcessorCategory.교양필수);
+                ProcessorCategory.교양필수);
         Processor<?, ?> majorSelectProcessor = ProcessorUtils.get(processorMap,
-            ProcessorCategory.전공선택);
+                ProcessorCategory.전공선택);
         Processor<?, ?> majorRequiredProcessor = ProcessorUtils.get(processorMap,
-            ProcessorCategory.전공필수);
+                ProcessorCategory.전공필수);
 
         // then
         assertThat(creativeProcessor).isInstanceOf(CreativityProcessor.class);

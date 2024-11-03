@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public interface CoreStrategy {
 
     ProcessorResponse.CoreDTO execute(
-        ProcessorRequest.CoreDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.CoreDTO request,
+            LinkedList<Take> allTakeList
     );
 }

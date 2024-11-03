@@ -26,9 +26,9 @@ public class CurriculumDecider {
 
     @Builder
     private CurriculumDecider(
-        MajorType majorType,
-        DepartmentName departmentName,
-        Integer joinYear
+            MajorType majorType,
+            DepartmentName departmentName,
+            Integer joinYear
     ) {
         this.majorType = majorType;
         this.departmentName = departmentName;

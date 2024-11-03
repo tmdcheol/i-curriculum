@@ -13,11 +13,10 @@ import java.util.Set;
 import static icurriculum.domain.take.Category.*;
 
 public class CategoryJudgeUtils {
+
     public static Map<String, Category> judge(List<String> codes, Curriculum curriculum) {
 
         Map<String, Category> judgeCodes = new HashMap<>();
-
-
 
         Set<String> eMajor = curriculum.getMajorRequired().getCodeSet();
         Set<String> cMajor = curriculum.getMajorSelect().getCodeSet();
@@ -37,7 +36,8 @@ public class CategoryJudgeUtils {
             } else { // 핵심교양이 아닌 과목들의 다른영역 확인
                 if (!creativityCodes.isEmpty() && creativityCodes.contains(code)) {
                     judgeCodes.put(code, Category.창의);
-                } else if (((!swAiCodes.isEmpty() && swAiCodes.contains(code)) || (swAialternativeCodes != null && swAialternativeCodes.contains(code)))) {
+                } else if (((!swAiCodes.isEmpty() && swAiCodes.contains(code)) || (
+                        swAialternativeCodes != null && swAialternativeCodes.contains(code)))) {
                     judgeCodes.put(code, Category.SW_AI);
                 } else if (eMajor.contains(code)) {
                     judgeCodes.put(code, Category.전공필수);
@@ -84,9 +84,9 @@ public class CategoryJudgeUtils {
             }
         }
         if (!isAreaFixed) {
-            return notAreaFixed(category,code,core);
+            return notAreaFixed(category, code, core);
         } else {
-            return areaFixed(category,code,core);
+            return areaFixed(category, code, core);
         }
     }
 
@@ -109,7 +109,6 @@ public class CategoryJudgeUtils {
         Set<String> swAiCodes = curriculum.getSwAi().getApprovedCodeSet();
         Set<String> swAialternativeCodes = curriculum.getSwAi().getAreaAlternativeCodeSet();
 
-
         for (String code : codes) {
             Category category = judgeCore(code, curriculum);  // 핵심교양 판단
             if (isCoreCode(category)) {
@@ -117,7 +116,8 @@ public class CategoryJudgeUtils {
             } else { // 핵심교양이 아닌 과목들의 다른영역 확인
                 if (creativityCodes != null && creativityCodes.contains(code)) {
                     return Category.창의;
-                } else if (((swAiCodes != null && swAiCodes.contains(code)) || (swAialternativeCodes != null && swAialternativeCodes.contains(code)))) {
+                } else if (((swAiCodes != null && swAiCodes.contains(code)) || (
+                        swAialternativeCodes != null && swAialternativeCodes.contains(code)))) {
                     return Category.SW_AI;
                 } else if (eMajor.contains(code)) {
                     return Category.전공필수;
@@ -132,16 +132,21 @@ public class CategoryJudgeUtils {
     }
 
     public static Category notAreaFixed(Category category, String code, Core core) {
-        if(category != 교양선택) return category;
+        if (category != 교양선택) {
+            return category;
+        }
         return getDeterminedCategory(code, core);
     }
 
     public static Category areaFixed(Category category, String code, Core core) {
-        if(category != 교양선택) {
+        if (category != 교양선택) {
             Set<Category> requiredAreaSet = core.getRequiredAreaSet();
-            if(!requiredAreaSet.contains(category)) return 교양선택;
-            else {
-                if(core.getAreaDeterminedCodeSet(category).isEmpty()) return category;
+            if (!requiredAreaSet.contains(category)) {
+                return 교양선택;
+            } else {
+                if (core.getAreaDeterminedCodeSet(category).isEmpty()) {
+                    return category;
+                }
             }
         }
         return getDeterminedCategory(code, core);
@@ -154,12 +159,24 @@ public class CategoryJudgeUtils {
         Set<String> determinedArea4 = core.getAreaDeterminedCodeSet(핵심교양4);
         Set<String> determinedArea5 = core.getAreaDeterminedCodeSet(핵심교양5);
         Set<String> determinedArea6 = core.getAreaDeterminedCodeSet(핵심교양6);
-        if(determinedArea1.contains(code)) return 핵심교양1;
-        if(determinedArea2.contains(code)) return 핵심교양2;
-        if(determinedArea3.contains(code)) return 핵심교양3;
-        if(determinedArea4.contains(code)) return 핵심교양4;
-        if(determinedArea5.contains(code)) return 핵심교양5;
-        if(determinedArea6.contains(code)) return 핵심교양6;
+        if (determinedArea1.contains(code)) {
+            return 핵심교양1;
+        }
+        if (determinedArea2.contains(code)) {
+            return 핵심교양2;
+        }
+        if (determinedArea3.contains(code)) {
+            return 핵심교양3;
+        }
+        if (determinedArea4.contains(code)) {
+            return 핵심교양4;
+        }
+        if (determinedArea5.contains(code)) {
+            return 핵심교양5;
+        }
+        if (determinedArea6.contains(code)) {
+            return 핵심교양6;
+        }
         return 교양선택;
     }
 }

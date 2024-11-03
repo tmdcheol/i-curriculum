@@ -51,7 +51,7 @@ public class Course extends BaseRDBEntity {
         }
         Course course = (Course) o;
         return Objects.equals(getCode(), course.getCode()) && Objects.equals(
-            getName(), course.getName()) && Objects.equals(getCredit(), course.getCredit());
+                getName(), course.getName()) && Objects.equals(getCredit(), course.getCredit());
     }
 
     @Override

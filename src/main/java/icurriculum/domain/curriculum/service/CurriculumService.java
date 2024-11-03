@@ -23,7 +23,7 @@ public class CurriculumService {
         CurriculumDecider decider = convertToDecider(memberMajor);
 
         Curriculum curriculum = repository.findByDecider(decider)
-            .orElseThrow(() -> new GeneralException(ErrorStatus.CURRICULUM_NOT_FOUND));
+                .orElseThrow(() -> new GeneralException(ErrorStatus.CURRICULUM_NOT_FOUND));
         curriculum.validate();
 
         return curriculum;
@@ -31,8 +31,8 @@ public class CurriculumService {
 
     private CurriculumDecider convertToDecider(MemberMajor memberMajor) {
         return CurriculumDecider.builder().majorType(memberMajor.getMajorType())
-            .departmentName(memberMajor.getDepartment().getName())
-            .joinYear(memberMajor.getMember().getJoinYear()).build();
+                .departmentName(memberMajor.getDepartment().getName())
+                .joinYear(memberMajor.getMember().getJoinYear()).build();
     }
 
 }

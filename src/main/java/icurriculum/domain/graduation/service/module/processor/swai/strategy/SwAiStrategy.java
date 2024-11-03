@@ -8,8 +8,8 @@ import java.util.LinkedList;
 public interface SwAiStrategy {
 
     ProcessorResponse.SwAiDTO execute(
-        ProcessorRequest.SwAiDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.SwAiDTO request,
+            LinkedList<Take> allTakeList
     );
 
 }

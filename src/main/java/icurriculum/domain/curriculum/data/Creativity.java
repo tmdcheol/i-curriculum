@@ -39,17 +39,17 @@ public class Creativity {
 
     @Builder
     private Creativity(
-        Set<String> approvedCodeSet,
-        Integer requiredCredit,
-        Map<String, Object> additionalInfoMap
+            Set<String> approvedCodeSet,
+            Integer requiredCredit,
+            Map<String, Object> additionalInfoMap
     ) {
         this.approvedCodeSet = (approvedCodeSet != null) ?
-            approvedCodeSet : new HashSet<>();
+                approvedCodeSet : new HashSet<>();
 
         this.requiredCredit = requiredCredit;
 
         this.additionalInfoMap = (additionalInfoMap != null) ?
-            additionalInfoMap : new HashMap<>();
+                additionalInfoMap : new HashMap<>();
 
         validate();
     }

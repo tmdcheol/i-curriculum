@@ -18,8 +18,8 @@ public class MajorSelectTest {
     void 빌더로_MajorSelect_객체_생성시_성공_테스트() {
         // given
         MajorSelect majorSelect = MajorSelect.builder()
-            .codeSet(Set.of("SUBJ3001", "SUBJ3002"))
-            .build();
+                .codeSet(Set.of("SUBJ3001", "SUBJ3002"))
+                .build();
 
         // then
         assertThat(majorSelect.getCodeSet()).containsExactlyInAnyOrder("SUBJ3001", "SUBJ3002");
@@ -35,9 +35,9 @@ public class MajorSelectTest {
         additionalInfo.put("semester", "Fall 2024");
 
         MajorSelect majorSelect = MajorSelect.builder()
-            .additionalInfoMap(additionalInfo)
-            .codeSet(Set.of("SUBJ3001", "SUBJ3002"))
-            .build();
+                .additionalInfoMap(additionalInfo)
+                .codeSet(Set.of("SUBJ3001", "SUBJ3002"))
+                .build();
 
         // then
         assertThat(majorSelect.getAdditionalInfo("professor")).contains("Dr. Lee");
@@ -50,9 +50,9 @@ public class MajorSelectTest {
     void 유효성_검사_실패시_예외_발생_테스트() {
         // when & then
         assertThatThrownBy(() -> MajorSelect.builder()
-            .codeSet(Set.of())
-            .build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
+                .codeSet(Set.of())
+                .build())
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
     }
 }

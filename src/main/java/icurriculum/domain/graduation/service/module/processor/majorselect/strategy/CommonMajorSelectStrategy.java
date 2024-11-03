@@ -26,27 +26,27 @@ public class CommonMajorSelectStrategy implements MajorSelectStrategy {
      */
     @Override
     public ProcessorResponse.MajorSelectDTO execute(
-        ProcessorRequest.MajorSelectDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.MajorSelectDTO request,
+            LinkedList<Take> allTakeList
     ) {
         MajorSelectResult result = new MajorSelectResult();
         result.initMajorSelectResult(request.creditWithData());
 
         handleResult(
-            allTakeList,
-            request.creditWithData(),
-            request.alternativeCourse(),
-            result
+                allTakeList,
+                request.creditWithData(),
+                request.alternativeCourse(),
+                result
         );
 
         return ProcessorConverter.to(result);
     }
 
     private void handleResult(
-        LinkedList<Take> allTakeList,
-        CreditWithData creditWithData,
-        AlternativeCourse alternativeCourse,
-        MajorSelectResult result
+            LinkedList<Take> allTakeList,
+            CreditWithData creditWithData,
+            AlternativeCourse alternativeCourse,
+            MajorSelectResult result
     ) {
         Set<String> majorSelectCodeSet = creditWithData.majorSelect().getCodeSet();
 
@@ -60,9 +60,9 @@ public class CommonMajorSelectStrategy implements MajorSelectStrategy {
             }
 
             if (GraduationUtils.isCodeAlternative(
-                take,
-                majorSelectCodeSet,
-                alternativeCourse)
+                    take,
+                    majorSelectCodeSet,
+                    alternativeCourse)
             ) {
                 result.update(take, iterator);
             }
@@ -77,7 +77,7 @@ public class CommonMajorSelectStrategy implements MajorSelectStrategy {
      */
     private boolean isCategoryGeneralRequired(Take take, Set<String> majorSelectCodeSet) {
         return GraduationUtils.isApprovedCategory(take, Category.전공선택) ||
-            GraduationUtils.isApproved(take, majorSelectCodeSet);
+                GraduationUtils.isApproved(take, majorSelectCodeSet);
     }
 
 }

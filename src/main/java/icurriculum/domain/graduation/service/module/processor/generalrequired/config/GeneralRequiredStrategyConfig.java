@@ -14,10 +14,10 @@ public class GeneralRequiredStrategyConfig {
 
     @Bean
     public Map<DepartmentName, GeneralRequiredStrategy> generalRequiredStrategyMap(
-        List<GeneralRequiredStrategy> strategyList
+            List<GeneralRequiredStrategy> strategyList
     ) {
         Map<DepartmentName, GeneralRequiredStrategy> strategyMap = new EnumMap<>(
-            DepartmentName.class);
+                DepartmentName.class);
 
         for (GeneralRequiredStrategy strategy : strategyList) {
 

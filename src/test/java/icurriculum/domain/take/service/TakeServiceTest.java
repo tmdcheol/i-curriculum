@@ -38,39 +38,39 @@ class TakeServiceTest {
     @BeforeEach
     void setUp() {
         testMember = Member.builder()
-            .name("이승철")
-            .joinYear(19)
-            .role(RoleType.ROLE_USER)
-            .build();
+                .name("이승철")
+                .joinYear(19)
+                .role(RoleType.ROLE_USER)
+                .build();
 
         course = Course.builder()
-            .code("CSE1101")
-            .name("객체지향프로그래밍")
-            .credit(3)
-            .build();
+                .code("CSE1101")
+                .name("객체지향프로그래밍")
+                .credit(3)
+                .build();
 
         customCourse = CustomCourse.builder()
-            .name("현장실습 18")
-            .credit(18)
-            .build();
+                .name("현장실습 18")
+                .credit(18)
+                .build();
 
         take = Take.builder()
-            .category(Category.전공필수)
-            .takenYear("23")
-            .takenSemester("1")
-            .member(testMember)
-            .course(course)
-            .majorType(MajorType.주전공)
-            .build();
+                .category(Category.전공필수)
+                .takenYear("23")
+                .takenSemester("1")
+                .member(testMember)
+                .course(course)
+                .majorType(MajorType.주전공)
+                .build();
 
         customTake = Take.builder()
-            .category(Category.전공선택)
-            .takenYear("23")
-            .takenSemester("2")
-            .member(testMember)
-            .customCourse(customCourse)
-            .majorType(MajorType.부전공)
-            .build();
+                .category(Category.전공선택)
+                .takenYear("23")
+                .takenSemester("2")
+                .member(testMember)
+                .customCourse(customCourse)
+                .majorType(MajorType.부전공)
+                .build();
     }
 
     @Test
@@ -78,7 +78,7 @@ class TakeServiceTest {
     void 멤버로_수강_리스트_조회_테스트() {
         // given
         when(takeRepository.findByMember(testMember))
-            .thenReturn(List.of(take, customTake));
+                .thenReturn(List.of(take, customTake));
 
         // when
         List<Take> takeList = takeService.getTakeListByMember(testMember);
@@ -95,7 +95,7 @@ class TakeServiceTest {
         // given
         MajorType majorType = MajorType.주전공;
         when(takeRepository.findByMemberAndMajorType(testMember, majorType))
-            .thenReturn(List.of(take));
+                .thenReturn(List.of(take));
 
         // when
         List<Take> takeList = takeService.getTakeListByMemberAndMajorType(testMember, majorType);

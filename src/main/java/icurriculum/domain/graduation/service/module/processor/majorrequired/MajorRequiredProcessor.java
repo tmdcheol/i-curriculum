@@ -14,16 +14,16 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class MajorRequiredProcessor implements
-    Processor<MajorRequiredDTO, ProcessorResponse.MajorRequiredDTO> {
+        Processor<MajorRequiredDTO, ProcessorResponse.MajorRequiredDTO> {
 
     private final Map<DepartmentName, MajorRequiredStrategy> majorRequiredStrategyMap;
 
     @Override
     public ProcessorResponse.MajorRequiredDTO execute(
-        ProcessorRequest.MajorRequiredDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.MajorRequiredDTO request,
+            LinkedList<Take> allTakeList
     ) {
         return majorRequiredStrategyMap.get(request.departmentName())
-            .execute(request, allTakeList);
+                .execute(request, allTakeList);
     }
 }

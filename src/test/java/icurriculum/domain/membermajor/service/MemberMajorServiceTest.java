@@ -38,19 +38,19 @@ class MemberMajorServiceTest {
     @BeforeEach
     void setUp() {
         testMember = Member.builder()
-            .name("이승철")
-            .joinYear(19)
-            .build();
+                .name("이승철")
+                .joinYear(19)
+                .build();
 
         testDepartment = Department.builder()
-            .name(DepartmentName.컴퓨터공학과)
-            .build();
+                .name(DepartmentName.컴퓨터공학과)
+                .build();
 
         testMemberMajor = MemberMajor.builder()
-            .department(testDepartment)
-            .majorType(MajorType.주전공)
-            .member(testMember)
-            .build();
+                .department(testDepartment)
+                .majorType(MajorType.주전공)
+                .member(testMember)
+                .build();
     }
 
     @Test
@@ -58,7 +58,7 @@ class MemberMajorServiceTest {
     void memberMajorListByMember_성공_테스트() {
         // given
         when(memberMajorRepository.findByMember(testMember))
-            .thenReturn(List.of(testMemberMajor));
+                .thenReturn(List.of(testMemberMajor));
 
         // when
         List<MemberMajor> result = memberMajorService.getMemberMajorListByMember(testMember);
@@ -73,11 +73,11 @@ class MemberMajorServiceTest {
     void memberMajorListByMember_실패_테스트() {
         // given
         when(memberMajorRepository.findByMember(testMember))
-            .thenReturn(Collections.emptyList());
+                .thenReturn(Collections.emptyList());
 
         // when & then
         assertThatThrownBy(() -> memberMajorService.getMemberMajorListByMember(testMember))
-            .isInstanceOf(GeneralException.class);
+                .isInstanceOf(GeneralException.class);
     }
 
     @Test
@@ -85,17 +85,17 @@ class MemberMajorServiceTest {
     void memberMajorListByMember_실패_테스트_주전공_없음() {
         // given
         testMemberMajor = MemberMajor.builder()
-            .department(testDepartment)
-            .member(testMember)
-            .majorType(MajorType.복수전공)
-            .build();
+                .department(testDepartment)
+                .member(testMember)
+                .majorType(MajorType.복수전공)
+                .build();
 
         when(memberMajorRepository.findByMember(testMember))
-            .thenReturn(List.of(testMemberMajor));
+                .thenReturn(List.of(testMemberMajor));
 
         // when & then
         assertThatThrownBy(() -> memberMajorService.getMemberMajorListByMember(testMember))
-            .isInstanceOf(GeneralException.class);
+                .isInstanceOf(GeneralException.class);
     }
 
     @Test
@@ -103,11 +103,11 @@ class MemberMajorServiceTest {
     void memberMajorByMemberAndMajorType_성공_테스트() {
         // given
         when(memberMajorRepository.findByMemberAndMajorType(testMember, MajorType.주전공))
-            .thenReturn(Optional.of(testMemberMajor));
+                .thenReturn(Optional.of(testMemberMajor));
 
         // when
         MemberMajor result = memberMajorService
-            .getMemberMajorByMemberAndMajorType(testMember, MajorType.주전공);
+                .getMemberMajorByMemberAndMajorType(testMember, MajorType.주전공);
 
         // then
         assertThat(result).isEqualTo(testMemberMajor);
@@ -118,11 +118,12 @@ class MemberMajorServiceTest {
     void memberMajorByMemberAndMajorType_실패_테스트() {
         // given
         when(memberMajorRepository.findByMemberAndMajorType(testMember, MajorType.주전공))
-            .thenReturn(Optional.empty());
+                .thenReturn(Optional.empty());
 
         // when & then
         assertThatThrownBy(
-            () -> memberMajorService.getMemberMajorByMemberAndMajorType(testMember, MajorType.주전공))
-            .isInstanceOf(GeneralException.class);
+                () -> memberMajorService.getMemberMajorByMemberAndMajorType(testMember,
+                        MajorType.주전공))
+                .isInstanceOf(GeneralException.class);
     }
 }

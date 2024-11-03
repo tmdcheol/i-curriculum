@@ -29,25 +29,25 @@ public class CommonCoreStrategy implements CoreStrategy {
 
     @Override
     public ProcessorResponse.CoreDTO execute(
-        ProcessorRequest.CoreDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.CoreDTO request,
+            LinkedList<Take> allTakeList
     ) {
         CoreResult result = new CoreResult();
         result.initUncompletedArea(request.core());
 
         // 영역 대체 과목
         Set<Course> areaAltCourseSet = handleAreaAlternative(
-            allTakeList,
-            request.core(),
-            request.alternativeCourse(),
-            result
+                allTakeList,
+                request.core(),
+                request.alternativeCourse(),
+                result
         );
 
         handleResult(
-            request.core(),
-            allTakeList,
-            areaAltCourseSet,
-            result
+                request.core(),
+                allTakeList,
+                areaAltCourseSet,
+                result
         );
 
         return ProcessorConverter.to(result);
@@ -63,10 +63,10 @@ public class CommonCoreStrategy implements CoreStrategy {
      *      이 후 작업에서 Set에 담겨있는 과목이면 건너뛴다.
      */
     private Set<Course> handleAreaAlternative(
-        LinkedList<Take> allTakeList,
-        Core core,
-        AlternativeCourse alternativeCourse,
-        CoreResult result
+            LinkedList<Take> allTakeList,
+            Core core,
+            AlternativeCourse alternativeCourse,
+            CoreResult result
     ) {
         Set<Course> areaAltCourseSet = new HashSet<>();
 
@@ -85,9 +85,9 @@ public class CommonCoreStrategy implements CoreStrategy {
                 }
 
                 if (GraduationUtils.isCodeAlternative(
-                    take,
-                    areaAlternativeCodeSet,
-                    alternativeCourse)
+                        take,
+                        areaAlternativeCodeSet,
+                        alternativeCourse)
                 ) {
                     result.update(take, iterator, area, true);
                     areaAltCourseSet.add(take.getEffectiveCourse());
@@ -110,10 +110,10 @@ public class CommonCoreStrategy implements CoreStrategy {
      * - 핵심교양으로 인정되는 과목은 LinkedList에서 삭제하고, result 를 업데이트한다.
      */
     private void handleResult(
-        Core core,
-        LinkedList<Take> allTakeList,
-        Set<Course> areaAltCourseSet,
-        CoreResult result
+            Core core,
+            LinkedList<Take> allTakeList,
+            Set<Course> areaAltCourseSet,
+            CoreResult result
     ) {
         Iterator<Take> iterator = allTakeList.iterator();
         while (iterator.hasNext()) {

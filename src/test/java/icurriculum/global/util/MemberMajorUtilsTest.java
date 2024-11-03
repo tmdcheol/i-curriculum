@@ -23,14 +23,14 @@ class MemberMajorUtilsTest {
     @BeforeEach
     void setUp() {
         testDepartment = Department.builder()
-            .name(컴퓨터공학과)
-            .build();
+                .name(컴퓨터공학과)
+                .build();
 
         testMember = Member.builder()
-            .name("이승철")
-            .joinYear(2019)
-            .role(ROLE_USER)
-            .build();
+                .name("이승철")
+                .joinYear(2019)
+                .role(ROLE_USER)
+                .build();
     }
 
     @Test
@@ -38,22 +38,22 @@ class MemberMajorUtilsTest {
     void extractMemberMajorByMajorType_shouldReturnMainMajor() {
         // given
         List<MemberMajor> memberMajors = List.of(
-            MemberMajor.builder()
-                .majorType(주전공)
-                .member(testMember)
-                .department(testDepartment)
-                .build(),
-            MemberMajor.builder()
-                .majorType(복수전공)
-                .member(testMember)
-                .department(testDepartment)
-                .build()
+                MemberMajor.builder()
+                        .majorType(주전공)
+                        .member(testMember)
+                        .department(testDepartment)
+                        .build(),
+                MemberMajor.builder()
+                        .majorType(복수전공)
+                        .member(testMember)
+                        .department(testDepartment)
+                        .build()
         );
 
         // when
         MemberMajor mainMajor = MemberMajorUtils.extractMemberMajorByMajorType(
-            memberMajors,
-            주전공
+                memberMajors,
+                주전공
         );
 
         // then
@@ -66,19 +66,19 @@ class MemberMajorUtilsTest {
     void extractMemberMajorByMajorType_shouldThrowExceptionWhenNoMajor() {
         // given
         List<MemberMajor> memberMajors = List.of(
-            MemberMajor.builder()
-                .majorType(복수전공)
-                .member(testMember)
-                .department(testDepartment)
-                .build()
+                MemberMajor.builder()
+                        .majorType(복수전공)
+                        .member(testMember)
+                        .department(testDepartment)
+                        .build()
         );
 
         // when & then
         assertThatThrownBy(() -> MemberMajorUtils.extractMemberMajorByMajorType(
-            memberMajors,
-            주전공
+                memberMajors,
+                주전공
         ))
-            .isInstanceOf(RuntimeException.class);
+                .isInstanceOf(RuntimeException.class);
     }
 
 }

@@ -14,7 +14,7 @@ public class SwAiStrategyConfig {
 
     @Bean
     public Map<DepartmentName, SwAiStrategy> swAiStrategyMap(
-        List<SwAiStrategy> strategyList
+            List<SwAiStrategy> strategyList
     ) {
         Map<DepartmentName, SwAiStrategy> strategyMap = new EnumMap<>(DepartmentName.class);
 

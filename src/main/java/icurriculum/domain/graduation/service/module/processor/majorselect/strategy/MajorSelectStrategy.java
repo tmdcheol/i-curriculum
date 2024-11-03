@@ -8,8 +8,8 @@ import java.util.LinkedList;
 public interface MajorSelectStrategy {
 
     ProcessorResponse.MajorSelectDTO execute(
-        ProcessorRequest.MajorSelectDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.MajorSelectDTO request,
+            LinkedList<Take> allTakeList
     );
 
 }

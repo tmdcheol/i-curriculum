@@ -38,9 +38,9 @@ class MemberMajorRepositoryTest {
     @BeforeEach
     void setUp() {
         testDataInitializer = new TestDataInitializer(
-            memberRepository,
-            departmentRepository,
-            memberMajorRepository
+                memberRepository,
+                departmentRepository,
+                memberMajorRepository
         );
 
         testMember = testDataInitializer.initMemberData();
@@ -56,7 +56,7 @@ class MemberMajorRepositoryTest {
 
         // then
         assertThat(findMemberMajorList).hasSameSizeAs(testMemberMajorList)
-            .containsExactlyInAnyOrderElementsOf(testMemberMajorList);
+                .containsExactlyInAnyOrderElementsOf(testMemberMajorList);
     }
 
     @Test
@@ -67,7 +67,7 @@ class MemberMajorRepositoryTest {
 
         // when
         Optional<MemberMajor> findMemberMajor = memberMajorRepository.findByMemberAndMajorType(
-            testMember, majorType);
+                testMember, majorType);
 
         // then
         assertThat(findMemberMajor).isPresent();

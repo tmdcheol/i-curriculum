@@ -59,28 +59,28 @@ public class Core {
 
     @Builder
     private Core(
-        Boolean isAreaFixed,
-        Integer requiredCredit,
-        Set<Category> requiredAreaSet,
-        Map<Category, Set<String>> areaDeterminedCodeMap,
-        Map<Category, Set<String>> areaAlternativeCodeMap,
-        Map<String, Object> additionalInfoMap
+            Boolean isAreaFixed,
+            Integer requiredCredit,
+            Set<Category> requiredAreaSet,
+            Map<Category, Set<String>> areaDeterminedCodeMap,
+            Map<Category, Set<String>> areaAlternativeCodeMap,
+            Map<String, Object> additionalInfoMap
     ) {
         this.isAreaFixed = isAreaFixed;
 
         this.requiredCredit = requiredCredit;
 
         this.requiredAreaSet = (requiredAreaSet != null) ?
-            requiredAreaSet : new HashSet<>();
+                requiredAreaSet : new HashSet<>();
 
         this.areaDeterminedCodeMap = (areaDeterminedCodeMap != null) ?
-            areaDeterminedCodeMap : new HashMap<>();
+                areaDeterminedCodeMap : new HashMap<>();
 
         this.areaAlternativeCodeMap = (areaAlternativeCodeMap != null) ?
-            areaAlternativeCodeMap : new HashMap<>();
+                areaAlternativeCodeMap : new HashMap<>();
 
         this.additionalInfoMap = (additionalInfoMap != null) ?
-            additionalInfoMap : new HashMap<>();
+                additionalInfoMap : new HashMap<>();
 
         validate();
     }

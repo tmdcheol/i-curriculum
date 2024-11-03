@@ -26,20 +26,20 @@ public class CommonSwAiStrategy implements SwAiStrategy {
      */
     @Override
     public ProcessorResponse.SwAiDTO execute(
-        ProcessorRequest.SwAiDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.SwAiDTO request,
+            LinkedList<Take> allTakeList
     ) {
         SwAiResult result = new SwAiResult();
 
         // 영역 대체 과목
         Set<Course> areaAltCourseSet = handleAreaAlternative(allTakeList, request.swAi(),
-            request.alternativeCourse(), result);
+                request.alternativeCourse(), result);
 
         handleResult(
-            request.swAi(),
-            allTakeList,
-            areaAltCourseSet,
-            result
+                request.swAi(),
+                allTakeList,
+                areaAltCourseSet,
+                result
         );
 
         return ProcessorConverter.to(result);
@@ -54,10 +54,10 @@ public class CommonSwAiStrategy implements SwAiStrategy {
      *      이 후 작업에서 Set에 담겨있는 과목이면 건너뛴다.
      */
     private Set<Course> handleAreaAlternative(
-        LinkedList<Take> allTakeList,
-        SwAi swAi,
-        AlternativeCourse alternativeCourse,
-        SwAiResult result
+            LinkedList<Take> allTakeList,
+            SwAi swAi,
+            AlternativeCourse alternativeCourse,
+            SwAiResult result
     ) {
         Set<Course> areaAltCourseSet = new HashSet<>();
 
@@ -72,9 +72,9 @@ public class CommonSwAiStrategy implements SwAiStrategy {
             }
 
             if (GraduationUtils.isCodeAlternative(
-                take,
-                swAi.getAreaAlternativeCodeSet(),
-                alternativeCourse)
+                    take,
+                    swAi.getAreaAlternativeCodeSet(),
+                    alternativeCourse)
             ) {
                 result.update(take, iterator, true);
                 areaAltCourseSet.add(take.getEffectiveCourse());
@@ -85,10 +85,10 @@ public class CommonSwAiStrategy implements SwAiStrategy {
     }
 
     private void handleResult(
-        SwAi swAi,
-        LinkedList<Take> allTakeList,
-        Set<Course> areaAltCourseSet,
-        SwAiResult result
+            SwAi swAi,
+            LinkedList<Take> allTakeList,
+            Set<Course> areaAltCourseSet,
+            SwAiResult result
     ) {
         Iterator<Take> iterator = allTakeList.iterator();
         while (iterator.hasNext()) {

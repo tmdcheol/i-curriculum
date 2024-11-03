@@ -35,11 +35,11 @@ class CoreStrategyConfigTest {
 
         // when
         Map<DepartmentName, CoreStrategy> strategyMap = coreStrategyConfig.coreStrategyMap(
-            strategyList
+                strategyList
         );
 
         // then
         assertThat(strategyMap)
-            .containsEntry(DepartmentName.컴퓨터공학과, commonCoreStrategy);
+                .containsEntry(DepartmentName.컴퓨터공학과, commonCoreStrategy);
     }
 }

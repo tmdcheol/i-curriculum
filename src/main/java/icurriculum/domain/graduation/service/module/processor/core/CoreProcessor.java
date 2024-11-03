@@ -13,16 +13,16 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class CoreProcessor implements
-    Processor<CoreDTO, ProcessorResponse.CoreDTO> {
+        Processor<CoreDTO, ProcessorResponse.CoreDTO> {
 
     private final Map<DepartmentName, CoreStrategy> coreStrategyMap;
 
     @Override
     public ProcessorResponse.CoreDTO execute(
-        ProcessorRequest.CoreDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.CoreDTO request,
+            LinkedList<Take> allTakeList
     ) {
         return coreStrategyMap.get(request.departmentName())
-            .execute(request, allTakeList);
+                .execute(request, allTakeList);
     }
 }

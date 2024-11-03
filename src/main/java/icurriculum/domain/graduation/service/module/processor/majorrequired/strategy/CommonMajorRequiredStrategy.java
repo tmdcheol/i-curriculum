@@ -21,29 +21,29 @@ public class CommonMajorRequiredStrategy implements MajorRequiredStrategy {
 
     @Override
     public ProcessorResponse.MajorRequiredDTO execute(
-        ProcessorRequest.MajorRequiredDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.MajorRequiredDTO request,
+            LinkedList<Take> allTakeList
     ) {
         MajorRequiredResult result = new MajorRequiredResult();
         result.initMajorRequiredResult(
-            request.CourseListWithData().essentialCourseList()
+                request.CourseListWithData().essentialCourseList()
         );
 
         handleResult(
-            allTakeList,
-            request.CourseListWithData(),
-            request.alternativeCourse(),
-            result
+                allTakeList,
+                request.CourseListWithData(),
+                request.alternativeCourse(),
+                result
         );
 
         return ProcessorConverter.to(result);
     }
 
     private void handleResult(
-        LinkedList<Take> allTakeList,
-        CourseListWithData<MajorRequired> courseListWithData,
-        AlternativeCourse alternativeCourse,
-        MajorRequiredResult result
+            LinkedList<Take> allTakeList,
+            CourseListWithData<MajorRequired> courseListWithData,
+            AlternativeCourse alternativeCourse,
+            MajorRequiredResult result
     ) {
 
         List<Course> majorRequiredCourseList = courseListWithData.essentialCourseList();
@@ -58,9 +58,9 @@ public class CommonMajorRequiredStrategy implements MajorRequiredStrategy {
                 continue;
             }
             GraduationUtils.getAlternativeCode(take, majorRequiredCodeSet, alternativeCourse)
-                .ifPresent(
-                    alternativeCode -> result.update(take, alternativeCode, iterator)
-                );
+                    .ifPresent(
+                            alternativeCode -> result.update(take, alternativeCode, iterator)
+                    );
         }
 
         result.setRequiredCredit(majorRequiredCourseList);

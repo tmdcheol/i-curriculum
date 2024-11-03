@@ -34,7 +34,7 @@ class ProcessorConfigTest {
 
         // when
         Map<ProcessorCategory, Processor<?, ?>> processorMap = processorConfig.processorMap(
-            processorList);
+                processorList);
 
         // then
         assertThat(processorMap).isNotNull();

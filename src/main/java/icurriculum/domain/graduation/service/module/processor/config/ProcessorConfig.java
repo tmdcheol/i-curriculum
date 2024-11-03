@@ -30,7 +30,7 @@ public class ProcessorConfig {
 
     @Bean
     public Processor<?, ?> creativityProcessor(
-        Map<DepartmentName, CreativityStrategy> creativityStrategyMap) {
+            Map<DepartmentName, CreativityStrategy> creativityStrategyMap) {
         return new CreativityProcessor(creativityStrategyMap);
     }
 
@@ -41,32 +41,32 @@ public class ProcessorConfig {
 
     @Bean
     public Processor<?, ?> generalRequiredProcessor(
-        Map<DepartmentName, GeneralRequiredStrategy> generalRequiredStrategyMap
+            Map<DepartmentName, GeneralRequiredStrategy> generalRequiredStrategyMap
     ) {
         return new GeneralRequiredProcessor(generalRequiredStrategyMap);
     }
 
     @Bean
     public Processor<?, ?> majorRequiredProcessor(
-        Map<DepartmentName, MajorRequiredStrategy> majorRequiredStrategyMap
+            Map<DepartmentName, MajorRequiredStrategy> majorRequiredStrategyMap
     ) {
         return new MajorRequiredProcessor(majorRequiredStrategyMap);
     }
 
     @Bean
     public Processor<?, ?> majorSelectProcessor(
-        Map<DepartmentName, MajorSelectStrategy> majorSelectStrategyMap
+            Map<DepartmentName, MajorSelectStrategy> majorSelectStrategyMap
     ) {
         return new MajorSelectProcessor(majorSelectStrategyMap);
     }
 
     @Bean
     public Map<ProcessorCategory, Processor<?, ?>> processorMap(
-        List<Processor<?, ?>> processorList
+            List<Processor<?, ?>> processorList
     ) {
 
         Map<ProcessorCategory, Processor<?, ?>> processorMap = new EnumMap<>(
-            ProcessorCategory.class
+                ProcessorCategory.class
         );
 
         for (Processor<?, ?> processor : processorList) {

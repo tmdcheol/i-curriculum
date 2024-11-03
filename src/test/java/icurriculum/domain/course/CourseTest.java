@@ -16,10 +16,10 @@ class CourseTest {
     @BeforeEach
     void setUp() {
         course = Course.builder()
-            .name(giveName)
-            .code(givenCode)
-            .credit(givenCredit)
-            .build();
+                .name(giveName)
+                .code(givenCode)
+                .credit(givenCredit)
+                .build();
     }
 
     @Test
@@ -41,10 +41,10 @@ class CourseTest {
     void 코스객체_equals_테스트() {
         // given
         Course equalCourse = Course.builder()
-            .code(givenCode)
-            .name(giveName)
-            .credit(givenCredit)
-            .build();
+                .code(givenCode)
+                .name(giveName)
+                .credit(givenCredit)
+                .build();
 
         // when & then
         assertThat(course).isEqualTo(equalCourse);
@@ -55,10 +55,10 @@ class CourseTest {
     void 코스객체_hashCode_테스트() {
         // given
         Course equalCourse = Course.builder()
-            .code(givenCode)
-            .name(giveName)
-            .credit(givenCredit)
-            .build();
+                .code(givenCode)
+                .name(giveName)
+                .credit(givenCredit)
+                .build();
 
         // when & then
         assertThat(course.hashCode()).isEqualTo(equalCourse.hashCode());

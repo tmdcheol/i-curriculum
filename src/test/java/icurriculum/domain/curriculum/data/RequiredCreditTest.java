@@ -15,11 +15,11 @@ public class RequiredCreditTest {
     void 빌더로_RequiredCredit_객체_생성시_필드_설정_테스트() {
         // given
         RequiredCredit requiredCredit = RequiredCredit.builder()
-            .totalNeedCredit(130)
-            .singleNeedCredit(65)
-            .secondNeedCredit(39)
-            .minorNeedCredit(21)
-            .build();
+                .totalNeedCredit(130)
+                .singleNeedCredit(65)
+                .secondNeedCredit(39)
+                .minorNeedCredit(21)
+                .build();
 
         // then
         assertThat(requiredCredit.getTotalNeedCredit()).isEqualTo(130);
@@ -33,11 +33,11 @@ public class RequiredCreditTest {
     void 필수이수학점_유효성_검사_실패_테스트() {
         // when & then
         assertThatThrownBy(() -> RequiredCredit.builder()
-            .totalNeedCredit(130)
-            .secondNeedCredit(39)
-            .minorNeedCredit(21)
-            .build())
-            .isInstanceOf(GeneralException.class)
-            .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
+                .totalNeedCredit(130)
+                .secondNeedCredit(39)
+                .minorNeedCredit(21)
+                .build())
+                .isInstanceOf(GeneralException.class)
+                .hasFieldOrPropertyWithValue("errorStatus", ErrorStatus.CURRICULUM_MISSING_VALUE);
     }
 }

@@ -32,31 +32,31 @@ public class CommonGeneralRequiredStrategy implements GeneralRequiredStrategy {
      */
     @Override
     public ProcessorResponse.GeneralRequiredDTO execute(
-        ProcessorRequest.GeneralRequiredDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.GeneralRequiredDTO request,
+            LinkedList<Take> allTakeList
     ) {
         GeneralRequiredResult result = new GeneralRequiredResult();
         result.initGeneralRequiredResult(
-            request.CourseListWithData().essentialCourseList()
+                request.CourseListWithData().essentialCourseList()
         );
 
         handleResult(
-            allTakeList,
-            request.CourseListWithData(),
-            request.alternativeCourse(),
-            request.joinYear(),
-            result
+                allTakeList,
+                request.CourseListWithData(),
+                request.alternativeCourse(),
+                request.joinYear(),
+                result
         );
 
         return ProcessorConverter.to(result);
     }
 
     private void handleResult(
-        LinkedList<Take> allTakeList,
-        CourseListWithData<GeneralRequired> CourseListWithData,
-        AlternativeCourse alternativeCourse,
-        final int joinYear,
-        GeneralRequiredResult result
+            LinkedList<Take> allTakeList,
+            CourseListWithData<GeneralRequired> CourseListWithData,
+            AlternativeCourse alternativeCourse,
+            final int joinYear,
+            GeneralRequiredResult result
     ) {
         List<Course> generalRequiredCourseList = CourseListWithData.essentialCourseList();
         Set<String> generalRequiredCodeSet = CourseListWithData.data().getCodeSet();
@@ -71,9 +71,10 @@ public class CommonGeneralRequiredStrategy implements GeneralRequiredStrategy {
             }
 
             GraduationUtils.getAlternativeCode(take, generalRequiredCodeSet, alternativeCourse)
-                .ifPresent(
-                    alternativeCode -> result.update(take, alternativeCode, iterator, joinYear)
-                );
+                    .ifPresent(
+                            alternativeCode -> result.update(take, alternativeCode, iterator,
+                                    joinYear)
+                    );
 
         }
 

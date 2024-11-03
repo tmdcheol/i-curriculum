@@ -14,7 +14,7 @@ public class CreativityStrategyConfig {
 
     @Bean
     public Map<DepartmentName, CreativityStrategy> creativityStrategyMap(
-        List<CreativityStrategy> strategyList
+            List<CreativityStrategy> strategyList
     ) {
         Map<DepartmentName, CreativityStrategy> strategyMap = new EnumMap<>(DepartmentName.class);
 

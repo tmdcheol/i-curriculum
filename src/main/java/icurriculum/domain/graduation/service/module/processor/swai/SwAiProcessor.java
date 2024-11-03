@@ -13,16 +13,16 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class SwAiProcessor implements
-    Processor<SwAiDTO, ProcessorResponse.SwAiDTO> {
+        Processor<SwAiDTO, ProcessorResponse.SwAiDTO> {
 
     private final Map<DepartmentName, SwAiStrategy> swAiStrategyMap;
 
     @Override
     public ProcessorResponse.SwAiDTO execute(
-        ProcessorRequest.SwAiDTO request,
-        LinkedList<Take> allTakeList
+            ProcessorRequest.SwAiDTO request,
+            LinkedList<Take> allTakeList
     ) {
         return swAiStrategyMap.get(request.departmentName())
-            .execute(request, allTakeList);
+                .execute(request, allTakeList);
     }
 }

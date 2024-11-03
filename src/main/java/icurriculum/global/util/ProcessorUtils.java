@@ -10,8 +10,8 @@ public abstract class ProcessorUtils {
 
     @SuppressWarnings("unchecked")
     public static <T, R> Processor<T, R> get(
-        Map<ProcessorCategory, Processor<?, ?>> processorMap,
-        ProcessorCategory category
+            Map<ProcessorCategory, Processor<?, ?>> processorMap,
+            ProcessorCategory category
     ) {
         Processor<?, ?> processor = processorMap.get(category);
         if (processor == null) {

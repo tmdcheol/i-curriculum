@@ -27,7 +27,7 @@ public class AlternativeCourse {
     @Builder
     private AlternativeCourse(Map<String, Set<String>> alternativeCourseCodeMap) {
         this.alternativeCourseCodeMap = (alternativeCourseCodeMap != null) ?
-            alternativeCourseCodeMap : new HashMap<>();
+                alternativeCourseCodeMap : new HashMap<>();
     }
 
     public Set<String> getAlternativeCodeSet(String code) {
