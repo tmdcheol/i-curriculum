@@ -45,8 +45,24 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok'
     //관리자 페이지를 위한 타임리프 추가
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    //ssh tunnel
+    implementation 'com.github.mwiede:jsch:0.2.16'
+
+    //swagger 설정
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+
+
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+processResources.dependsOn('copyGitSubmodule')
+
+tasks.register('copyGitSubmodule', Copy) {
+    from './config'
+    include '*.yml'
+    into 'src/main/resources'
 }

@@ -41,3 +41,5 @@ out/
 
 # Ignore Test application.yml
 /src/test/resources/application.yml
+
+config
