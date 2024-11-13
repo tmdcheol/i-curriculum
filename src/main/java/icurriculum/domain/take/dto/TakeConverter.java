@@ -38,7 +38,6 @@ public abstract class TakeConverter {
             .member(member)
             .course(null)
             .customCourse(CustomCourse.builder()
-                .code(takeCreateDTO.getCode())
                 .name(takeCreateDTO.getName())
                 .credit(takeCreateDTO.getCredit())
                 .build())
