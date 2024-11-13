@@ -5,15 +5,15 @@ import icurriculum.domain.course.Course;
 import icurriculum.domain.course.dto.CourseConverter;
 import icurriculum.domain.course.dto.CourseResponse.DetailInfoDTO;
 import icurriculum.domain.course.repository.CourseRepository;
-
-import java.util.*;
-
 import icurriculum.domain.curriculum.Curriculum;
 import icurriculum.domain.curriculum.service.CurriculumService;
 import icurriculum.domain.membermajor.MemberMajor;
 import icurriculum.domain.take.Category;
 import icurriculum.global.response.exception.GeneralException;
 import icurriculum.global.response.status.ErrorStatus;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,19 +31,11 @@ public class CourseService {
     }
 
     public DetailInfoDTO getCourse(String code, MemberMajor memberMajor) {
-        Optional<Course> course = repository.findByCode(code);
-        /**
-         * todo : error 처리 수
-         */
-        if (course.isEmpty()) {
-            throw new GeneralException(ErrorStatus.COURSE_IS_NOT_VALID, this);
-        }
-        Course findCourse = course.get();
-        ArrayList<String> codes = new ArrayList<>();
-        codes.add(code);
+        Course findCourse = repository.findByCode(code)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.COURSE_IS_NOT_VALID, this));
         Curriculum curriculum = curriculumService.getCurriculumByMemberMajor(memberMajor);
         curriculum.validate();
-        Map<String, Category> judgedCodes = CategoryJudgeUtils.judge(codes, curriculum);
+        Map<String, Category> judgedCodes = CategoryJudgeUtils.judge(code, curriculum);
         return CourseConverter.toCourseDetailInfo(findCourse, judgedCodes.get(code));
     }
 }
