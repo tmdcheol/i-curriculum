@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+  <title>I-CURRICULUM</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<div class="container">
+  <div th:replace="~{fragments/bodyHeader :: bodyHeader}"/>
+
+  <div class="jumbotron">
+    <p class="lead font-italic">관리자 페이지</p>
+    <hr class="my-4">
+
+    <p class="lead">커리큘럼 등록</p>
+    <form action="/admin/curriculum/register" method="get" style="display:inline;">
+      <button type="submit" class="btn btn-lg btn-outline-primary">등록하기</button>
+    </form>
+
+    <hr class="my-4">
+
+    <p class="lead">커리큘럼 수정</p>
+    <form action="/admin/curriculum/modify" method="get" style="display:inline;">
+      <button type="submit" class="btn btn-lg btn-outline-primary">수정하기</button>
+    </form>
+
+    <hr class="my-4">
+
+    <p class="lead">커리큘럼 삭제</p>
+    <form action="/admin/curriculum/delete" method="get" style="display:inline;">
+      <button type="submit" class="btn btn-lg btn-outline-primary" disabled>삭제하기</button>
+    </form>
+
+
+  </div>
+  <div th:replace="~{fragments/footer :: footer}"/>
+</div>
+
+</body>
+</html>

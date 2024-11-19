@@ -1,5 +1,8 @@
 package icurriculum.domain.take;
 
+import icurriculum.global.response.exception.GeneralException;
+import icurriculum.global.response.status.ErrorStatus;
+
 public enum Category {
 
     /*
@@ -25,6 +28,23 @@ public enum Category {
     핵심교양3,
     핵심교양4,
     핵심교양5,
-    핵심교양6
+    핵심교양6;
+
+    public static Category to(String value) {
+        try {
+            return Category.valueOf(value);
+        } catch (IllegalArgumentException e) {
+            throw new GeneralException(ErrorStatus.CATEGORY_INVALID_DATA, value);
+        }
+    }
+
+    public static boolean isValid(String value) {
+        for (Category category : Category.values()) {
+            if (category.name().equals(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

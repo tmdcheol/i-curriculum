@@ -3,19 +3,25 @@ package icurriculum.domain.curriculum.data;
 import static lombok.AccessLevel.PROTECTED;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import icurriculum.admin.web.form.detail.Entry;
 import icurriculum.domain.take.Category;
 import icurriculum.global.response.exception.GeneralException;
 import icurriculum.global.response.status.ErrorStatus;
 import icurriculum.global.util.GraduationUtils;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 
 /*
@@ -55,16 +61,16 @@ public class Core {
     private Map<Category, Set<String>> areaAlternativeCodeMap = new HashMap<>();
 
     @JsonProperty("추가정보")
-    private Map<String, Object> additionalInfoMap = new HashMap<>();
+    private Map<String, String> additionalInfoMap = new HashMap<>();
 
     @Builder
     private Core(
-            Boolean isAreaFixed,
-            Integer requiredCredit,
+            @NonNull Boolean isAreaFixed,
+            @NonNull Integer requiredCredit,
             Set<Category> requiredAreaSet,
             Map<Category, Set<String>> areaDeterminedCodeMap,
             Map<Category, Set<String>> areaAlternativeCodeMap,
-            Map<String, Object> additionalInfoMap
+            Map<String, String> additionalInfoMap
     ) {
         this.isAreaFixed = isAreaFixed;
 
@@ -95,20 +101,36 @@ public class Core {
         return areaAlternativeCodeMap.getOrDefault(category, Collections.emptySet());
     }
 
-    public Optional<Object> getAdditionalInfo(String key) {
-        return Optional.ofNullable(additionalInfoMap.get(key));
-    }
-
     public void validate() {
-        if (isAreaFixed == null || requiredCredit == null) {
-            throw new GeneralException(ErrorStatus.CURRICULUM_MISSING_VALUE, this);
-        }
         if (!isAreaFixed && !requiredAreaSet.isEmpty()) {
             throw new GeneralException(ErrorStatus.CORE_INVALID_DATA, this);
         }
         if (isAreaFixed && requiredAreaSet.isEmpty()) {
             throw new GeneralException(ErrorStatus.CORE_INVALID_DATA, this);
         }
+    }
+
+    public <T> Optional<T> getAdditionalInfo(String key, Class<T> targetType) {
+        String json = additionalInfoMap.get(key);
+        if (json == null || json.isBlank()) {
+            throw new GeneralException(ErrorStatus.EMPTY_ADDITIONAL_INFO_FAILURE, key);
+        }
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            T value = objectMapper.readValue(json, targetType);
+            return Optional.of(value);
+        } catch (JsonProcessingException e) {
+            throw new GeneralException(ErrorStatus.DESERIALIZATION_FAILURE, this, e);
+        }
+    }
+
+    public List<Entry> getAdditionalInfoForFrontend() {
+        List<Entry> entries = new ArrayList<>();
+        for (String key : additionalInfoMap.keySet()) {
+            String jsonValue = additionalInfoMap.get(key);
+            entries.add(new Entry(key, jsonValue));
+        }
+        return entries;
     }
 
     private void validateCategory(Category category) {

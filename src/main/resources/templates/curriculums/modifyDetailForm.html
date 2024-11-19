@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+  <title>I-CURRICULUM</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<style>
+  .btn-custom {
+    width: 140px;
+    display: inline-block;
+  }
+</style>
+
+<body>
+
+<div class="container">
+  <div th:replace="~{fragments/bodyHeader :: bodyHeader}"/>
+  <div class="jumbotron">
+    <p class="lead font-italic">커리큘럼 수정</p>
+    <hr class="my-4">
+
+    <!-- 핵심교양 수정 -->
+    <form th:action="@{/admin/curriculum/modify/detail/core}" method="get" style="display:inline;">
+      <input type="hidden" name="majorType" th:value="${modifyParam.majorType}"/>
+      <input type="hidden" name="departmentName" th:value="${modifyParam.departmentName}"/>
+      <input type="hidden" name="joinYear" th:value="${modifyParam.joinYear}"/>
+      <input type="hidden" name="lastEditor" th:value="${modifyParam.lastEditor}"/>
+      <button type="submit" class="btn btn-lg btn-outline-primary btn-custom">핵심교양</button>
+    </form>
+
+    <!-- SW-AI 수정 -->
+    <form th:action="@{/admin/curriculum/modify/detail/sw-ai}" method="get" style="display:inline;">
+      <input type="hidden" name="majorType" th:value="${modifyParam.majorType}"/>
+      <input type="hidden" name="departmentName" th:value="${modifyParam.departmentName}"/>
+      <input type="hidden" name="joinYear" th:value="${modifyParam.joinYear}"/>
+      <input type="hidden" name="lastEditor" th:value="${modifyParam.lastEditor}"/>
+      <button type="submit" class="btn btn-lg btn-outline-primary btn-custom">SW-AI</button>
+    </form>
+
+    <!-- 창의 수정 -->
+    <form th:action="@{/admin/curriculum/modify/detail/creativity}" method="get"
+          style="display:inline;">
+      <input type="hidden" name="majorType" th:value="${modifyParam.majorType}"/>
+      <input type="hidden" name="departmentName" th:value="${modifyParam.departmentName}"/>
+      <input type="hidden" name="joinYear" th:value="${modifyParam.joinYear}"/>
+      <input type="hidden" name="lastEditor" th:value="${modifyParam.lastEditor}"/>
+      <button type="submit" class="btn btn-lg btn-outline-primary btn-custom">창의</button>
+    </form>
+
+    <hr class="my-4">
+
+    <!-- 전공필수 수정 -->
+    <form th:action="@{/admin/curriculum/modify/detail/major-required}" method="get"
+          style="display:inline;">
+      <input type="hidden" name="majorType" th:value="${modifyParam.majorType}"/>
+      <input type="hidden" name="departmentName" th:value="${modifyParam.departmentName}"/>
+      <input type="hidden" name="joinYear" th:value="${modifyParam.joinYear}"/>
+      <input type="hidden" name="lastEditor" th:value="${modifyParam.lastEditor}"/>
+      <button type="submit" class="btn btn-lg btn-outline-primary btn-custom">전공필수</button>
+    </form>
+
+    <!-- 전공선택 수정 -->
+    <form th:action="@{/admin/curriculum/modify/detail/major-select}" method="get"
+          style="display:inline;">
+      <input type="hidden" name="majorType" th:value="${modifyParam.majorType}"/>
+      <input type="hidden" name="departmentName" th:value="${modifyParam.departmentName}"/>
+      <input type="hidden" name="joinYear" th:value="${modifyParam.joinYear}"/>
+      <input type="hidden" name="lastEditor" th:value="${modifyParam.lastEditor}"/>
+      <button type="submit" class="btn btn-lg btn-outline-primary btn-custom">전공선택</button>
+    </form>
+
+    <!-- 교양필수 수정 -->
+    <form th:action="@{/admin/curriculum/modify/detail/general-required}" method="get"
+          style="display:inline;">
+      <input type="hidden" name="majorType" th:value="${modifyParam.majorType}"/>
+      <input type="hidden" name="departmentName" th:value="${modifyParam.departmentName}"/>
+      <input type="hidden" name="joinYear" th:value="${modifyParam.joinYear}"/>
+      <input type="hidden" name="lastEditor" th:value="${modifyParam.lastEditor}"/>
+      <button type="submit" class="btn btn-lg btn-outline-primary btn-custom">교양필수</button>
+    </form>
+
+    <hr class="my-4">
+
+    <!-- 요구학점 수정 -->
+    <form th:action="@{/admin/curriculum/modify/detail/required-credit}" method="get"
+          style="display:inline;">
+      <input type="hidden" name="majorType" th:value="${modifyParam.majorType}"/>
+      <input type="hidden" name="departmentName" th:value="${modifyParam.departmentName}"/>
+      <input type="hidden" name="joinYear" th:value="${modifyParam.joinYear}"/>
+      <input type="hidden" name="lastEditor" th:value="${modifyParam.lastEditor}"/>
+      <button type="submit" class="btn btn-lg btn-outline-primary btn-custom">요구학점</button>
+    </form>
+
+    <!-- 대체과목 수정 -->
+    <form th:action="@{/admin/curriculum/modify/detail/alternative-course}" method="get"
+          style="display:inline;">
+      <input type="hidden" name="majorType" th:value="${modifyParam.majorType}"/>
+      <input type="hidden" name="departmentName" th:value="${modifyParam.departmentName}"/>
+      <input type="hidden" name="joinYear" th:value="${modifyParam.joinYear}"/>
+      <input type="hidden" name="lastEditor" th:value="${modifyParam.lastEditor}"/>
+      <button type="submit" class="btn btn-lg btn-outline-primary btn-custom">대체과목</button>
+    </form>
+
+  </div>
+  <div th:replace="~{fragments/footer :: footer}"/>
+</div>
+
+</body>
+</html>

@@ -34,8 +34,8 @@ public class CourseService {
         Course findCourse = repository.findByCode(code)
                 .orElseThrow(() -> new GeneralException(ErrorStatus.COURSE_IS_NOT_VALID, this));
         Curriculum curriculum = curriculumService.getCurriculumByMemberMajor(memberMajor);
-        curriculum.validate();
-        Map<String, Category> judgedCodes = CategoryJudgeUtils.judge(code, curriculum);
+
+        Map<String, Category> judgedCodes = CategoryJudgeUtils.judge(codes, curriculum);
         return CourseConverter.toCourseDetailInfo(findCourse, judgedCodes.get(code));
     }
 }

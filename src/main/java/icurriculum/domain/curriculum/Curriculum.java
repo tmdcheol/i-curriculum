@@ -11,12 +11,11 @@ import icurriculum.domain.curriculum.data.MajorRequired;
 import icurriculum.domain.curriculum.data.MajorSelect;
 import icurriculum.domain.curriculum.data.RequiredCredit;
 import icurriculum.domain.curriculum.data.SwAi;
-import icurriculum.global.response.exception.GeneralException;
-import icurriculum.global.response.status.ErrorStatus;
 import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.CompoundIndexes;
@@ -39,17 +38,6 @@ public class Curriculum extends BaseMongoEntity {
 
     private CurriculumDecider decider;
     private String lastEditor;
-    /*
-     * - 핵심교양
-     * - SW_AI
-     * - 창의
-     * - 전공필수
-     * - 전공선택
-     * - 교양필수
-     * - 필수이수학점
-     * - 대체과목
-     */
-
     private Core core;
     private SwAi swAi;
     private Creativity creativity;
@@ -61,12 +49,16 @@ public class Curriculum extends BaseMongoEntity {
 
     @Builder
     private Curriculum(
-            CurriculumDecider decider,
-            String lastEditor,
-            Core core, SwAi swAi,
-            Creativity creativity, MajorRequired majorRequired,
-            MajorSelect majorSelect, GeneralRequired generalRequired,
-            RequiredCredit requiredCredit, AlternativeCourse alternativeCourse
+            @NonNull CurriculumDecider decider,
+            @NonNull String lastEditor,
+            @NonNull Core core,
+            @NonNull SwAi swAi,
+            @NonNull Creativity creativity,
+            @NonNull MajorRequired majorRequired,
+            @NonNull MajorSelect majorSelect,
+            @NonNull GeneralRequired generalRequired,
+            @NonNull RequiredCredit requiredCredit,
+            @NonNull AlternativeCourse alternativeCourse
     ) {
         this.decider = decider;
         this.lastEditor = lastEditor;
@@ -78,42 +70,9 @@ public class Curriculum extends BaseMongoEntity {
         this.generalRequired = generalRequired;
         this.requiredCredit = requiredCredit;
         this.alternativeCourse = alternativeCourse;
-
-        validate();
-    }
-
-    /*
-     * [validate]
-     *
-     * MongoDB repository로 데이터를 조회할 때,
-     * DB에 없는 데이터는 null로 셋팅된다. -> NullPointException 발생 가능성이 높다.
-     *
-     * 따라서 필수값이 빠져있으면 에러를 터트린다.
-     * 필수값이 아니라면, NullPointException을 방지하기 위해 빈 데이터를 셋팅한다.
-     */
-
-    public void validate() {
-        if (decider == null || lastEditor == null ||
-                core == null || swAi == null ||
-                creativity == null || majorRequired == null ||
-                majorSelect == null || generalRequired == null ||
-                requiredCredit == null || alternativeCourse == null
-        ) {
-            throw new GeneralException(ErrorStatus.CURRICULUM_MISSING_VALUE, this);
-        }
-
-        decider.validate();
-        core.validate();
-        swAi.validate();
-        creativity.validate();
-        majorRequired.validate();
-        majorSelect.validate();
-        generalRequired.validate();
-        requiredCredit.validate();
     }
 
     public void update(Curriculum newCurriculum) {
-
         this.lastEditor = newCurriculum.getLastEditor();
         this.core = newCurriculum.getCore();
         this.swAi = newCurriculum.getSwAi();
@@ -123,9 +82,38 @@ public class Curriculum extends BaseMongoEntity {
         this.generalRequired = newCurriculum.getGeneralRequired();
         this.requiredCredit = newCurriculum.getRequiredCredit();
         this.alternativeCourse = newCurriculum.getAlternativeCourse();
-
-        this.validate();
     }
 
+    public void updateRequiredCredit(RequiredCredit requiredCredit) {
+        this.requiredCredit = requiredCredit;
+    }
+
+    public void updateMajorRequired(MajorRequired majorRequired) {
+        this.majorRequired = majorRequired;
+    }
+
+    public void updateMajorSelect(MajorSelect majorSelect) {
+        this.majorSelect = majorSelect;
+    }
+
+    public void updateGeneralRequired(GeneralRequired generalRequired) {
+        this.generalRequired = generalRequired;
+    }
+
+    public void updateSwAi(SwAi swAi) {
+        this.swAi = swAi;
+    }
+
+    public void updateCore(Core core) {
+        this.core = core;
+    }
+
+    public void updateCreativity(Creativity creativity) {
+        this.creativity = creativity;
+    }
+
+    public void updateAlternativeCourse(AlternativeCourse alternativeCourse) {
+        this.alternativeCourse = alternativeCourse;
+    }
 
 }

@@ -4,12 +4,11 @@ import static lombok.AccessLevel.PROTECTED;
 
 import icurriculum.domain.department.DepartmentName;
 import icurriculum.domain.membermajor.MajorType;
-import icurriculum.global.response.exception.GeneralException;
-import icurriculum.global.response.status.ErrorStatus;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 
 @NoArgsConstructor(access = PROTECTED)
@@ -26,21 +25,13 @@ public class CurriculumDecider {
 
     @Builder
     private CurriculumDecider(
-            MajorType majorType,
-            DepartmentName departmentName,
-            Integer joinYear
+            @NonNull MajorType majorType,
+            @NonNull DepartmentName departmentName,
+            @NonNull Integer joinYear
     ) {
         this.majorType = majorType;
         this.departmentName = departmentName;
         this.joinYear = joinYear;
-
-        validate();
-    }
-
-    public void validate() {
-        if (majorType == null || departmentName == null || joinYear == null) {
-            throw new GeneralException(ErrorStatus.CURRICULUM_DECIDER_MISSING_VALUE, this);
-        }
     }
 
 }

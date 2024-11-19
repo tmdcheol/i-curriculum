@@ -3,16 +3,22 @@ package icurriculum.domain.curriculum.data;
 import static lombok.AccessLevel.PROTECTED;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import icurriculum.admin.web.form.detail.Entry;
 import icurriculum.global.response.exception.GeneralException;
 import icurriculum.global.response.status.ErrorStatus;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 
 /*
@@ -43,14 +49,14 @@ public class SwAi {
     private Integer requiredCredit;
 
     @JsonProperty("추가정보")
-    private Map<String, Object> additionalInfoMap = new HashMap<>();
+    private Map<String, String> additionalInfoMap = new HashMap<>();
 
     @Builder
     private SwAi(
             Set<String> approvedCodeSet,
             Set<String> areaAlternativeCodeSet,
-            Integer requiredCredit,
-            Map<String, Object> additionalInfoMap
+            @NonNull Integer requiredCredit,
+            Map<String, String> additionalInfoMap
     ) {
         this.approvedCodeSet = (approvedCodeSet != null) ?
                 approvedCodeSet : new HashSet<>();
@@ -66,20 +72,36 @@ public class SwAi {
         validate();
     }
 
-    public Optional<Object> getAdditionalInfo(String key) {
-        return Optional.ofNullable(additionalInfoMap.get(key));
-    }
-
     public void validate() {
-        if (requiredCredit == null) {
-            throw new GeneralException(ErrorStatus.SW_AI_INVALID_DATA, this);
-        }
         if (requiredCredit.equals(0) && !approvedCodeSet.isEmpty()) {
             throw new GeneralException(ErrorStatus.SW_AI_INVALID_DATA, this);
         }
         if (!requiredCredit.equals(0) && approvedCodeSet.isEmpty()) {
             throw new GeneralException(ErrorStatus.SW_AI_INVALID_DATA, this);
         }
+    }
+
+    public <T> Optional<T> getAdditionalInfo(String key, Class<T> targetType) {
+        String json = additionalInfoMap.get(key);
+        if (json == null || json.isBlank()) {
+            throw new GeneralException(ErrorStatus.EMPTY_ADDITIONAL_INFO_FAILURE, key);
+        }
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            T value = objectMapper.readValue(json, targetType);
+            return Optional.of(value);
+        } catch (JsonProcessingException e) {
+            throw new GeneralException(ErrorStatus.DESERIALIZATION_FAILURE, this, e);
+        }
+    }
+
+    public List<Entry> getAdditionalInfoForFrontend() {
+        List<Entry> entries = new ArrayList<>();
+        for (String key : additionalInfoMap.keySet()) {
+            String jsonValue = additionalInfoMap.get(key);
+            entries.add(new Entry(key, jsonValue));
+        }
+        return entries;
     }
 
 }

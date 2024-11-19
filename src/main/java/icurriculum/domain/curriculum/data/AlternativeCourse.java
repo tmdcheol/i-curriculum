@@ -34,6 +34,10 @@ public class AlternativeCourse {
         return alternativeCourseCodeMap.getOrDefault(code, Collections.emptySet());
     }
 
+    public Set<String> getCodeKeySet() {
+        return alternativeCourseCodeMap.keySet();
+    }
+
 }
 
 /*

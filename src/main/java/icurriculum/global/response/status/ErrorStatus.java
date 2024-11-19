@@ -54,9 +54,21 @@ public enum ErrorStatus {
             "창의의 데이터형식이 올바르지 않습니다."),
 
     /*
+     * majorType
+     */
+    MAJOR_TYPE_INVALID_DATA(HttpStatus.BAD_REQUEST, "MAJORTYPE400", "전공상태의 데이터형식이 올바르지 않습니다."),
+
+    /*
+     * departmentName
+     */
+    DEPARTMENT_NAME_INVALID_DATA(HttpStatus.BAD_REQUEST, "DEPARTMENTNAME400",
+            "학과이름의 데이터형식이 올바르지 않습니다."),
+
+    /*
      * category
      */
     CATEGORY_IS_NOT_VALID(HttpStatus.BAD_REQUEST, "CATEGORY401", "사용자가 수정한 과목영역이 올바르지 않습니다."),
+    CATEGORY_INVALID_DATA(HttpStatus.BAD_REQUEST, "CATEGORY402", "과목영역의 데이터형식이 올바르지 않습니다."),
 
     /*
      * processor
@@ -71,7 +83,21 @@ public enum ErrorStatus {
     /*
      * course
      */
-    COURSE_IS_NOT_VALID(HttpStatus.BAD_REQUEST, "COURSE400", "존재하지 않는 course 입니다.");
+    COURSE_IS_NOT_VALID(HttpStatus.BAD_REQUEST, "COURSE400", "존재하지 않는 course 입니다."),
+
+    /*
+     * code
+     */
+    CODE_IS_NOT_VALID(HttpStatus.BAD_REQUEST, "CODE400",
+            "입력 값이 학수번호의 형식에 맞지 않습니다. (e.g., ABC1234)"),
+
+    /*
+     * additionalInfoMap
+     */
+    DESERIALIZATION_FAILURE(HttpStatus.BAD_REQUEST, "ADDITIONAL400",
+            "추가정보 역직렬화에 실패하였습니다."),
+    EMPTY_ADDITIONAL_INFO_FAILURE(HttpStatus.BAD_REQUEST, "ADDITIONAL401",
+            "추가정보에 key 값에 대응하는 value 값이 존재하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;

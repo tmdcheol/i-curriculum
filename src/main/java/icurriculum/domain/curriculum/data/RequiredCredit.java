@@ -3,11 +3,10 @@ package icurriculum.domain.curriculum.data;
 import static lombok.AccessLevel.PROTECTED;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import icurriculum.global.response.exception.GeneralException;
-import icurriculum.global.response.status.ErrorStatus;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 
 /*
@@ -32,25 +31,15 @@ public class RequiredCredit {
 
     @Builder
     private RequiredCredit(
-            Integer totalNeedCredit,
-            Integer singleNeedCredit,
-            Integer secondNeedCredit,
-            Integer minorNeedCredit
+            @NonNull Integer totalNeedCredit,
+            @NonNull Integer singleNeedCredit,
+            @NonNull Integer secondNeedCredit,
+            @NonNull Integer minorNeedCredit
     ) {
         this.totalNeedCredit = totalNeedCredit;
         this.singleNeedCredit = singleNeedCredit;
         this.secondNeedCredit = secondNeedCredit;
         this.minorNeedCredit = minorNeedCredit;
-
-        validate();
-    }
-
-    public void validate() {
-        if (totalNeedCredit == null || singleNeedCredit == null ||
-                secondNeedCredit == null || minorNeedCredit == null
-        ) {
-            throw new GeneralException(ErrorStatus.CURRICULUM_MISSING_VALUE, this);
-        }
     }
 }
 

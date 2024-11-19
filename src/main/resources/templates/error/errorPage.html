@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+  <title>I-CURRICULUM</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<div class="container">
+  <div th:replace="~{fragments/bodyHeader :: bodyHeader}"/>
+
+  <div class="jumbotron">
+    <div class="container">
+      <p class="lead font-italic">에러가 발생했습니다</p>
+
+      <hr class="my-4">
+
+      <p class="lead font-italic" th:text="'에러 메시지: ' + ${errorMessage}"></p>
+      <p class="lead font-italic" th:text="'에러 상태: ' + ${errorStatus}"></p>
+      <p class="lead font-italic" th:text="'에러 상태: ' + ${errorStatusMessage}"></p>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/footer :: footer}"/>
+</div>
+
+</body>
+</html>

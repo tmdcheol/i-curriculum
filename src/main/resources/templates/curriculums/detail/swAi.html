@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+  <style>
+    .fieldError {
+      border-color: #bd2130;
+    }
+  </style>
+<body>
+
+<div class="container">
+  <div th:replace="~{fragments/bodyHeader :: bodyHeader}"/>
+
+  <div class="jumbotron">
+    <p class="lead font-italic">SW-AI 수정</p>
+    <hr class="my-4">
+
+    <form role="form" th:action="@{/admin/curriculum/modify/detail/sw-ai}"
+          th:object="${swAiForm}"
+          method="post">
+      <input type="hidden" name="majorType" th:value="${modifyParam.majorType}"/>
+      <input type="hidden" name="departmentName" th:value="${modifyParam.departmentName}"/>
+      <input type="hidden" name="joinYear" th:value="${modifyParam.joinYear}"/>
+      <input type="hidden" name="lastEditor" th:value="${modifyParam.lastEditor}"/>
+
+      <!-- 기본적인 조회 데이터 -->
+      <div class="form-group">
+        <p class="lead font-italic font">과목 코드</p>
+        <textarea id="approvedCodeSet" th:field="*{approvedCodeSet}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{approvedCodeSet}">
+          학수번호의 형식에 맞지 않습니다. (e.g., ABC1234)
+        </div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">영역 대체 과목코드</p>
+        <textarea id="areaAlternativeCodeSet" th:field="*{areaAlternativeCodeSet}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="영역 대체 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaAlternativeCodeSet}">
+          학수번호의 형식에 맞지 않습니다. (e.g., ABC1234)
+        </div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">필요 학점</p>
+        <input type="number" id="requiredCredit" th:field="*{requiredCredit}"
+               th:errorclass="field-error" class="form-control" placeholder="필요 학점을 입력하세요.">
+        <div class="field-error" th:errors="*{requiredCredit}">필요학점 오류</div>
+      </div>
+
+      <hr class="my-4">
+
+      <div id="entryContainer">
+        <p class="lead font-italic">추가 정보, 선택사항</p>
+
+        <div th:if="${#fields.hasErrors('additionalInfos')}" class="form-group">
+          <div class="field-error" th:errors="*{additionalInfos}">
+            추가 정보 기입 에러
+          </div>
+        </div>
+
+        <div th:each="entry, iterStat : ${swAiForm.additionalInfos()}"
+             class="d-flex align-items-center mb-2 entry-row">
+          <div class="form-group flex-grow-1 mr-2">
+            <textarea th:attr="name=|additionalInfos[${iterStat.index}].key|"
+                      class="form-control"
+                      placeholder="key 값을 입력하세요.">[[${entry.key}]]</textarea>
+          </div>
+          <div class="form-group flex-grow-1 mr-2">
+            <textarea th:attr="name=|additionalInfos[${iterStat.index}].value|"
+                      class="form-control"
+                      placeholder="value 값을 json 형식으로 입력하세요.">[[${entry.value}]]</textarea>
+          </div>
+          <div class="form-group">
+            <button type="button"
+                    class="btn btn-outline-danger btn-delete-custom delete-entry-button d-flex justify-content-center align-items-center">
+              X
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <button type="button" class="btn btn-lg btn-outline-primary" id="add-entry-button">행 추가하기
+      </button>
+
+      <hr class="my-4">
+
+      <button type="submit" class="btn btn-lg btn-outline-primary">저장하기</button>
+    </form>
+  </div>
+  <br/>
+  <div th:replace="~{fragments/footer :: footer}"/>
+</div> <!-- /container -->
+
+</body>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let entryIndex = document.querySelectorAll(".entry-row").length;
+
+    document.addEventListener("click", function (event) {
+      if (event.target && event.target.classList.contains("delete-entry-button")) {
+        event.preventDefault();
+        const row = event.target.closest(".entry-row");
+        if (row) {
+          row.remove();  // DOM에서 행을 제거합니다
+          // 인덱스 재설정 (필요할 경우)
+          reIndexEntries();
+        }
+      }
+    });
+
+    document.getElementById("add-entry-button").addEventListener("click", function () {
+      const rows = document.querySelectorAll(".entry-row");
+      const lastRow = rows[rows.length - 1];
+
+      if (rows.length != 0) {
+        const keyField = lastRow.querySelector("textarea[name$='.key']");
+        const valueField = lastRow.querySelector("textarea[name$='.value']");
+
+        if (!keyField.value.trim() || !valueField.value.trim()) {
+          alert("모든 필드를 입력해야 합니다.");
+          return;
+        }
+      }
+
+      const entryContainer = document.getElementById("entryContainer");
+      const newRow = document.createElement("div");
+      newRow.className = "d-flex align-items-center mb-2 entry-row";
+
+      newRow.innerHTML = `
+      <div class="form-group flex-grow-1 mr-2">
+        <textarea name="additionalInfos[${entryIndex}].key" class="form-control"
+                 placeholder="key 값을 입력하세요."></textarea>
+      </div>
+      <div class="form-group flex-grow-1 mr-2">
+        <textarea name="additionalInfos[${entryIndex}].value" class="form-control"
+                 placeholder="value 값을 json 형식으로 입력하세요."></textarea>
+      </div>
+      <div class="form-group">
+        <button type="button"
+                class="btn btn-outline-danger btn-delete-custom delete-entry-button d-flex justify-content-center align-items-center">
+          X
+        </button>
+      </div>
+    `;
+
+      entryContainer.appendChild(newRow);
+      entryIndex++;
+    });
+
+    function reIndexEntries() {
+      const rows = document.querySelectorAll(".entry-row");
+      rows.forEach((row, index) => {
+        const keyField = row.querySelector("textarea[name$='.key']");
+        const valueField = row.querySelector("textarea[name$='.value']");
+        if (keyField) {
+          keyField.name = `additionalInfos[${index}].key`;
+        }
+        if (valueField) {
+          valueField.name = `additionalInfos[${index}].value`;
+        }
+      });
+      // 인덱스를 다시 설정
+      entryIndex = rows.length;
+    }
+  });
+
+</script>
+
+</html>

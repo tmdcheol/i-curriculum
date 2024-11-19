@@ -15,18 +15,11 @@ public class CurriculumService {
 
     private final CurriculumRepository repository;
 
-    /*
-     * Mongo DB에서 값을 가져올 때, 저장된 데이터가 없을 시 null 일 수 있음.
-     * NullpointException 방지를 위해 validate 실행
-     */
     public Curriculum getCurriculumByMemberMajor(MemberMajor memberMajor) {
         CurriculumDecider decider = convertToDecider(memberMajor);
 
-        Curriculum curriculum = repository.findByDecider(decider)
+        return repository.findByDecider(decider)
                 .orElseThrow(() -> new GeneralException(ErrorStatus.CURRICULUM_NOT_FOUND));
-        curriculum.validate();
-
-        return curriculum;
     }
 
     private CurriculumDecider convertToDecider(MemberMajor memberMajor) {

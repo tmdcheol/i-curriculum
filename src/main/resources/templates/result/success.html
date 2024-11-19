@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+  <title>I-CURRICULUM</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+
+<div class="container">
+  <div th:replace="~{fragments/bodyHeader :: bodyHeader}"/>
+
+  <div class="jumbotron">
+    <div class="container">
+      <p th:text="${message}" class="lead font-italic"></p> <!-- 성공 메시지 출력 -->
+
+      <hr class="my-4">
+      <form role="form" th:action="@{/admin}" method="get">
+        <button type="submit" class="btn btn-lg btn-outline-primary" id="add-entry-button">홈 화면으로 이동
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/footer :: footer}"/>
+</div>
+
+</body>
+</html>

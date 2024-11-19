@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+  <style>
+    .fieldError {
+      border-color: #bd2130;
+    }
+
+    .checkbox-large {
+      transform: scale(1.5); /* 원하는 크기로 조정, 예: 1.5배 */
+    }
+
+    .btn-delete-custom {
+      width: 37px;
+      height: 37px;
+      display: inline-block;
+    }
+
+  </style>
+<body>
+
+<div class="container">
+  <div th:replace="~{fragments/bodyHeader :: bodyHeader}"/>
+
+  <div class="jumbotron">
+    <p class="lead font-italic">핵심교양 수정</p>
+    <hr class="my-4">
+
+    <form id="coreForm" role="form" th:action="@{/admin/curriculum/modify/detail/core}"
+          th:object="${coreForm}"
+          method="post">
+      <input type="hidden" name="majorType" th:value="${modifyParam.majorType}"/>
+      <input type="hidden" name="departmentName" th:value="${modifyParam.departmentName}"/>
+      <input type="hidden" name="joinYear" th:value="${modifyParam.joinYear}"/>
+      <input type="hidden" name="lastEditor" th:value="${modifyParam.lastEditor}"/>
+
+      <!-- 기본적인 조회 데이터 -->
+
+      <div class="form-group">
+        <p class="lead font-italic">영역 지정 여부</p>
+        <!-- 체크박스는 선택되었을 때만 true 값을 전송 -->
+        <input type="checkbox" th:field="*{isAreaFixed}" class="form-check-label checkbox-large"
+               id="isAreaFixed" value="true">
+      </div>
+
+      <hr class="my-4">
+
+      <div class="form-group">
+        <p class="lead font-italic font">필요 학점</p>
+        <input type="number" id="requiredCredit" th:field="*{requiredCredit}"
+               th:errorclass="field-error" class="form-control" placeholder="필요 학점을 입력하세요.">
+        <div class="field-error" th:errors="*{requiredCredit}">필요 학점 오류</div>
+      </div>
+
+      <hr class="my-4">
+
+      <div class="form-group">
+        <p class="lead font-italic font">필수 영역</p>
+        <textarea id="requiredAreaSet" th:field="*{requiredAreaSet}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="영역을 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{requiredAreaSet}">필수 영역 오류</div>
+      </div>
+
+      <hr class="my-4">
+
+      <br>
+      <p class="lead font-italic font">영역 지정 과목코드</p>
+      <br>
+      <!-- 각 코드 세트 입력 -->
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 1</p>
+        <textarea id="areaDeterminedCodeSetOne" th:field="*{areaDeterminedCodeSetOne}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양1 지정 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaDeterminedCodeSetOne}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 2</p>
+        <textarea id="areaDeterminedCodeSetTwo" th:field="*{areaDeterminedCodeSetTwo}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양2 지정 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaDeterminedCodeSetTwo}"></div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 3</p>
+        <textarea id="areaDeterminedCodeSetThree" th:field="*{areaDeterminedCodeSetThree}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양3 지정 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaDeterminedCodeSetThree}"></div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 4</p>
+        <textarea id="areaDeterminedCodeSetFour" th:field="*{areaDeterminedCodeSetFour}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양4 지정 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaDeterminedCodeSetFour}"></div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 5</p>
+        <textarea id="areaDeterminedCodeSetFive" th:field="*{areaDeterminedCodeSetFive}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양5 지정 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaDeterminedCodeSetFive}"></div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 6</p>
+        <textarea id="areaDeterminedCodeSetSix" th:field="*{areaDeterminedCodeSetSix}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양6 지정 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaDeterminedCodeSetSix}"></div>
+      </div>
+
+      <br>
+      <hr class="my-4">
+      <br>
+      <p class="lead font-italic">영역 대체 과목코드</p>
+      <br>
+
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 1</p>
+        <textarea id="areaAlternativeCodeSetOne" th:field="*{areaAlternativeCodeSetOne}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양1 영역대체 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaAlternativeCodeSetOne}"></div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 2</p>
+        <textarea id="areaAlternativeCodeSetTwo" th:field="*{areaAlternativeCodeSetTwo}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양2 영역대체 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaAlternativeCodeSetTwo}"></div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 3</p>
+        <textarea id="areaAlternativeCodeSetThree" th:field="*{areaAlternativeCodeSetThree}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양3 영역대체 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaAlternativeCodeSetThree}"></div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 4</p>
+        <textarea id="areaAlternativeCodeSetFour" th:field="*{areaAlternativeCodeSetFour}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양4 영역대체 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaAlternativeCodeSetFour}"></div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 5</p>
+        <textarea id="areaAlternativeCodeSetFive" th:field="*{areaAlternativeCodeSetFive}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양5 영역대체 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaAlternativeCodeSetFive}"></div>
+      </div>
+
+      <div class="form-group">
+        <p class="lead font-italic font">핵심교양 6</p>
+        <textarea id="areaAlternativeCodeSetSix" th:field="*{areaAlternativeCodeSetSix}"
+                  th:errorclass="field-error" class="form-control"
+                  placeholder="핵심교양6 영역대체 과목코드를 쉼표로 구분하여 입력하세요."></textarea>
+        <div class="field-error" th:errors="*{areaAlternativeCodeSetSix}"></div>
+      </div>
+
+      <hr class="my-4">
+
+      <div id="entryContainer">
+        <p class="lead font-italic">추가 정보, 선택사항</p>
+
+        <div th:if="${#fields.hasErrors('additionalInfos')}" class="form-group">
+          <div class="field-error" th:errors="*{additionalInfos}">
+            추가 정보 기입 에러
+          </div>
+        </div>
+
+        <div th:each="entry, iterStat : ${coreForm.additionalInfos()}"
+             class="d-flex align-items-center mb-2 entry-row">
+          <div class="form-group flex-grow-1 mr-2">
+    <textarea th:attr="name=|additionalInfos[${iterStat.index}].key|"
+              class="form-control"
+              placeholder="key 값을 입력하세요.">[[${entry.key}]]</textarea>
+          </div>
+          <div class="form-group flex-grow-1 mr-2">
+    <textarea th:attr="name=|additionalInfos[${iterStat.index}].value|"
+              class="form-control"
+              placeholder="value 값을 json 형식으로 입력하세요.">[[${entry.value}]]</textarea>
+          </div>
+          <div class="form-group">
+            <button type="button"
+                    class="btn btn-outline-danger btn-delete-custom delete-entry-button d-flex justify-content-center align-items-center">
+              X
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <button type="button" class="btn btn-lg btn-outline-primary" id="add-entry-button">행 추가하기
+      </button>
+
+      <hr class="my-4">
+
+      <button type="submit" class="btn btn-lg btn-outline-primary">저장하기</button>
+    </form>
+  </div>
+  <br/>
+  <div th:replace="~{fragments/footer :: footer}"/>
+</div> <!-- /container -->
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let entryIndex = document.querySelectorAll(".entry-row").length;
+
+    document.addEventListener("click", function (event) {
+      if (event.target && event.target.classList.contains("delete-entry-button")) {
+        event.preventDefault();
+        const row = event.target.closest(".entry-row");
+        if (row) {
+          row.remove();  // DOM에서 행을 제거합니다
+          // 인덱스 재설정 (필요할 경우)
+          reIndexEntries();
+        }
+      }
+    });
+
+    document.getElementById("add-entry-button").addEventListener("click", function () {
+      const rows = document.querySelectorAll(".entry-row");
+      const lastRow = rows[rows.length - 1];
+
+      if (rows.length != 0) {
+        const keyField = lastRow.querySelector("textarea[name$='.key']");
+        const valueField = lastRow.querySelector("textarea[name$='.value']");
+
+        if (!keyField.value.trim() || !valueField.value.trim()) {
+          alert("모든 필드를 입력해야 합니다.");
+          return;
+        }
+      }
+
+      const entryContainer = document.getElementById("entryContainer");
+      const newRow = document.createElement("div");
+      newRow.className = "d-flex align-items-center mb-2 entry-row";
+
+      newRow.innerHTML = `
+      <div class="form-group flex-grow-1 mr-2">
+        <textarea name="additionalInfos[${entryIndex}].key" class="form-control"
+                 placeholder="key 값을 입력하세요."></textarea>
+      </div>
+      <div class="form-group flex-grow-1 mr-2">
+        <textarea name="additionalInfos[${entryIndex}].value" class="form-control"
+                 placeholder="value 값을 json 형식으로 입력하세요."></textarea>
+      </div>
+      <div class="form-group">
+        <button type="button"
+                class="btn btn-outline-danger btn-delete-custom delete-entry-button d-flex justify-content-center align-items-center">
+          X
+        </button>
+      </div>
+    `;
+
+      entryContainer.appendChild(newRow);
+      entryIndex++;
+    });
+
+    function reIndexEntries() {
+      const rows = document.querySelectorAll(".entry-row");
+      rows.forEach((row, index) => {
+        const keyField = row.querySelector("textarea[name$='.key']");
+        const valueField = row.querySelector("textarea[name$='.value']");
+        if (keyField) {
+          keyField.name = `additionalInfos[${index}].key`;
+        }
+        if (valueField) {
+          valueField.name = `additionalInfos[${index}].value`;
+        }
+      });
+      // 인덱스를 다시 설정
+      entryIndex = rows.length;
+    }
+  });
+
+</script>
+
+
+</body>
+</html>

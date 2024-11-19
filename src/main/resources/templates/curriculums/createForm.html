@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+  <title>I-CURRICULUM</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <link th:href="@{/css/bootstrap.min.css}"
+        href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+  <div th:replace="~{fragments/bodyHeader :: bodyHeader}"/>
+
+  <div class="jumbotron">
+    <p class="lead font-italic">커리큘럼 등록</p>
+    <hr class="my-4">
+
+    <form action="/admin/curriculum/register" th:action th:object="${registerForm}" method="post">
+
+      <div th:if="${#fields.hasGlobalErrors()}">
+        <p class="field-error"
+           th:each="err : ${#fields.globalErrors()}"
+           th:text="${err}">글로벌 오류 메시지
+        </p>
+      </div>
+
+      <div class="mb-3">
+        <p class="lead">전공상태</p>
+        <select class="form-select" id="majorType" name="majorType"
+                th:field="*{majorType}"
+                th:classappend="${#fields.hasErrors('majorType')} ? 'is-invalid' : ''">
+          <option value="" disabled selected>전공상태</option>
+          <option th:each="majorType : ${majorTypes}"
+                  th:value="${majorType}"
+                  th:text="${majorType}">
+          </option>
+        </select>
+        <div class="field-error" th:errors="*{majorType}"> 전공상태 오류
+        </div>
+
+
+        <hr class="my-4">
+
+        <div class="mb-3">
+          <p class="lead">학과이름</p>
+          <select class="form-select" id="departmentName" name="departmentName"
+                  th:field="*{departmentName}"
+                  th:classappend="${#fields.hasErrors('departmentName')} ? 'is-invalid' : ''">
+            <option value="" disabled selected>학과이름</option>
+            <option th:each="departmentName : ${departmentNames}"
+                    th:value="${departmentName}"
+                    th:text="${departmentName}">
+            </option>
+          </select>
+          <div th:if="${#fields.hasErrors('departmentName')}" class="invalid-feedback">
+            <p th:errors="*{departmentName}"></p>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="mb-3">
+          <p class="lead">기준년도</p>
+          <select class="form-select" id="joinYear" name="joinYear"
+                  th:field="*{joinYear}"
+                  th:classappend="${#fields.hasErrors('joinYear')} ? 'is-invalid' : ''">
+            <option value="" disabled selected>기준년도</option>
+            <option th:each="joinYear : ${joinYears}"
+                    th:value="${joinYear}"
+                    th:text="${joinYear}">
+            </option>
+          </select>
+          <div th:if="${#fields.hasErrors('joinYear')}" class="invalid-feedback">
+            <p th:errors="*{joinYear}"></p>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="mb-3">
+          <p class="lead">등록자</p>
+          <select class="form-select" id="lastEditor" name="lastEditor"
+                  th:field="*{lastEditor}"
+                  th:classappend="${#fields.hasErrors('lastEditor')} ? 'is-invalid' : ''">
+            <option value="" disabled selected>등록자</option>
+            <option th:each="lastEditor : ${lastEditors}"
+                    th:value="${lastEditor}"
+                    th:text="${lastEditor}">
+            </option>
+          </select>
+          <div th:if="${#fields.hasErrors('lastEditor')}" class="invalid-feedback">
+            <p th:errors="*{lastEditor}"></p>
+          </div>
+        </div>
+
+        <hr class="my-4">
+        <!-- 크롤링된 데이터 입력 필드 -->
+        <label class="lead" for="curriculumData">커리큘럼 데이터 (JSON)</label><br>
+        <textarea id="curriculumData" name="curriculumData" rows="10" cols="50"></textarea><br><br>
+
+        <button id="jsonCrawler" type="button" class="btn btn-lg btn-outline-primary"
+                onclick="loadJsonCrawler()">크롤링 API 호출
+        </button>
+
+        <button type="submit" class="btn btn-lg btn-outline-primary"
+                th:text="#{page.register.button}">
+          신규 등록
+        </button>
+      </div>
+    </form>
+
+  </div>
+  <div th:replace="~{fragments/footer :: footer}"/>
+</div>
+
+<script>
+  function loadJsonCrawler() {
+    const departmentName = document.getElementById('departmentName').value;
+    const joinYear = document.getElementById('joinYear').value;
+    const lastEditor = document.getElementById('lastEditor').value;
+
+    if (departmentName && joinYear && lastEditor) {
+      // 크롤링 API 호출
+      fetch(
+          `https://natxn3un54zdpmtoouxsjae22q0wqzjb.lambda-url.ap-northeast-2.on.aws/?departmentName=${departmentName}&joinYear=${joinYear}`,
+          {
+            method: 'GET',
+            headers: {
+              'Origin': 'http://localhost:8080/',
+            }
+          })
+      .then(response => response.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          const modifiedData = {...data[0]};
+          modifiedData.lastEditor = lastEditor;
+          document.getElementById('curriculumData').value = JSON.stringify(modifiedData, null, 2);
+        } else {
+          document.getElementById('curriculumData').value = JSON.stringify(data, null, 2);
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    } else {
+      alert('모든 필수 항목을 채워주세요.');
+    }
+  }
+</script>
+
+</body>
+</html>

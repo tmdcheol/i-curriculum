@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+  <style>
+    .fieldError {
+      border-color: #bd2130;
+    }
+  </style>
+<body>
+
+<div class="container">
+  <div th:replace="~{fragments/bodyHeader :: bodyHeader}"/>
+
+  <div class="jumbotron">
+    <p class="lead font-italic font">필요학점 수정</p>
+    <hr class="my-4">
+
+    <form role="form" th:action="@{/admin/curriculum/modify/detail/required-credit}"
+          th:object="${requiredCreditForm}"
+          method="post">
+      <input type="hidden" name="majorType" th:value="${modifyParam.majorType}"/>
+      <input type="hidden" name="departmentName" th:value="${modifyParam.departmentName}"/>
+      <input type="hidden" name="joinYear" th:value="${modifyParam.joinYear}"/>
+      <input type="hidden" name="lastEditor" th:value="${modifyParam.lastEditor}"/>
+
+      <!-- 총 필요학점 -->
+      <div class="form-group">
+        <p class="lead font-italic font">총 필요학점</p>
+        <input type="number" id="totalNeedCredit" th:field="*{totalNeedCredit}"
+               th:errorclass="field-error" class="form-control" placeholder="총 필요학점을 입력하세요.">
+        <div class="field-error" th:errors="*{totalNeedCredit}"> 총 필요학점 오류</div>
+      </div>
+
+      <!-- 단일전공 필요학점 -->
+      <div class="form-group">
+        <p class="lead font-italic font">단일전공 필요학점</p>
+        <input type="number" id="singleNeedCredit" th:field="*{singleNeedCredit}"
+               th:errorclass="field-error" class="form-control" placeholder="단일전공 필요학점을 입력하세요.">
+        <div class="field-error" th:errors="*{singleNeedCredit}"> 단일전공 필요학점 오류</div>
+      </div>
+
+      <!-- 복수/연계/융합 전공 필요학점 -->
+      <div class="form-group">
+        <p class="lead font-italic font">복수/연계/융합 전공 필요학점</p>
+        <input type="number" id="secondNeedCredit" th:field="*{secondNeedCredit}"
+               th:errorclass="field-error" class="form-control"
+               placeholder="복수/연계/융합 전공 필요학점을 입력하세요.">
+        <div class="field-error" th:errors="*{secondNeedCredit}"> 복수/연계/융합 전공 필요학점 오류</div>
+      </div>
+
+      <!-- 부전공 필요학점 -->
+      <div class="form-group">
+        <p class="lead font-italic font">부전공 필요학점</p>
+        <input type="number" id="minorNeedCredit" th:field="*{minorNeedCredit}"
+               th:errorclass="field-error" class="form-control" placeholder="부전공 필요학점을 입력하세요.">
+        <div class="field-error" th:errors="*{minorNeedCredit}"> 부전공 필요학점 오류</div>
+      </div>
+
+
+      <hr class="my-4">
+      <button type="submit" class="btn btn-lg btn-outline-primary">저장하기</button>
+    </form>
+  </div>
+  <br/>
+  <div th:replace="~{fragments/footer :: footer}"/>
+</div> <!-- /container -->
+
+</body>
+</html>

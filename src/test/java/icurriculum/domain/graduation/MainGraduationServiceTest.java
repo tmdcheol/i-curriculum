@@ -1,6 +1,6 @@
 package icurriculum.domain.graduation;
 
-import icurriculum.data.컴공19BData;
+import icurriculum.data.컴공19GHJata;
 import icurriculum.domain.graduation.service.module.MainGraduationService;
 import icurriculum.domain.member.Member;
 import icurriculum.domain.member.repository.MemberRepository;
@@ -24,7 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 //@Import(컴공22LSJata.class)
 //@Import(컴공22SData.class)
 //@Import(컴공22OData.class)
-@Import(컴공19BData.class)
+//@Import(컴공19BData.class)
+@Import(컴공19GHJata.class)
 class MainGraduationServiceTest {
 
     @Autowired
